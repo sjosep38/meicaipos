@@ -6,140 +6,43 @@
     <title>Mei Cai Store POS v2.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css"> </head>
-	
+    <link rel="stylesheet" href="style.css">
 	<style>
-	:root {
-    --primary: #0f172a;        /* Deep Slate / Midnight Blue */
-    --accent: #10b981;         /* Emerald Green */
-    --danger: #ef4444;         /* Soft Red */
-    --warning: #f59e0b;        /* Amber */
-    --edit: #3b82f6;           /* Royal Blue */
-    --bg-main: #f8fafc;        /* Soft White / Light Gray */
-    --text-dark: #1e293b;      /* Slate Gray Dark */
-    --text-muted: #64748b;     /* Slate Gray Light */
-    --border-color: #e2e8f0;   /* Clean Thin Border Line */
-    --radius: 12px;
-    --radius-sm: 6px;
-    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	/* ==========================================================================
+   THEME VARIABLES & BASICS CONFIGURATIONS
+   ========================================================================== */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --accent: #10b981;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --bg-main: #f8fafc;
+    --border-color: #cbd5e1;
+    --danger: #ef4444;
+    --warning: #f59e0b;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0;
-    padding: 0;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-main);
     color: var(--text-dark);
-    height: 100vh;
     overflow: hidden;
-    letter-spacing: -0.01em;
 }
 
-/* Custom Minimalist Scrollbars */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-/* System Access Authentication Layout */
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.modal-content {
-    background: #ffffff;
-    padding: 32px;
-    border-radius: var(--radius);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    border: 1px solid var(--border-color);
-}
-
-#password-input, #customerName, #customerpassword, #managerPinInput, #payMethod {
-    width: 100%;
-    padding: 12px 14px;
-    margin: 8px 0 16px 0;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    box-sizing: border-box;
-    font-size: 14px;
-    background-color: #f8fafc;
-    color: var(--text-dark);
-    transition: var(--transition);
-}
-
-#password-input:focus, #customerName:focus, #customerpassword:focus, #managerPinInput:focus, #payMethod:focus {
-    border-color: var(--edit);
-    background-color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-#login-btn {
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-}
-#login-btn:hover { background: #1e293b; }
-
-.error-msg {
-    color: var(--danger);
-    font-size: 13px;
-    text-align: center;
-    margin-bottom: 12px;
-    font-weight: 600;
-}
-
-/* Premium Navigation Header Bar */
+/* ==========================================================================
+   NAVIGATION DESKTOP HEADER BAR
+   ========================================================================== */
 .dashboard-header {
+    height: 60px;
     background: #ffffff;
-    color: var(--text-dark);
-    padding: 0 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 65px;
     border-bottom: 1px solid var(--border-color);
-}
-
-#fullscreen-btn {
-    font-weight: 700;
-    font-size: 1.15rem;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--primary);
-}
-#fullscreen-btn small {
-    color: var(--text-muted);
-    background: var(--bg-main);
-    padding: 3px 8px;
-    border-radius: 20px;
-    font-weight: 500;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 .header-actions {
@@ -148,315 +51,49 @@ body {
 }
 
 .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background: #ffffff;
     border: 1px solid var(--border-color);
-    color: var(--text-dark);
-    padding: 10px 16px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
+    padding: 8px 14px;
     font-size: 13px;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: var(--transition);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-dark);
+    transition: all 0.2s;
 }
-.nav-btn:hover {
-    background: var(--bg-main);
-    border-color: #cbd5e1;
+
+.nav-btn:hover, .nav-btn.active {
+    background: #f1f5f9;
+    border-color: var(--text-muted);
 }
-.nav-btn i { color: var(--text-muted); }
 
 .btn-logout {
-    background: #fef2f2;
-    border-color: #fee2e2;
+    border-color: var(--danger);
     color: var(--danger);
 }
 .btn-logout:hover {
-    background: var(--danger);
-    color: white;
-    border-color: var(--danger);
-}
-.btn-logout i { color: inherit; }
-
-/* Dashboard Container Split Panel Layout */
-.app-container {
-    display: flex;
-    height: calc(100vh - 65px);
-    padding: 16px;
-    gap: 16px;
-    box-sizing: border-box;
-    background-color: var(--bg-main);
+    background: #fef2f2;
 }
 
-.column {
-    background: #ffffff;
-    border-radius: var(--radius);
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-}
-
-.products-panel { flex: 1.4; }
-.cart-panel { flex: 1.2; }
-.checkout-panel { flex: 1.1; }
-
-.column h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    font-weight: 700;
-}
-
-/* Clean Material Input Fields */
-.input-group {
-    position: relative;
-    margin-bottom: 12px;
-}
-.input-group input {
-    width: 100%;
-    padding: 14px 12px 10px 12px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    outline: none;
-    box-sizing: border-box;
-    font-size: 14px;
-    background: #f8fafc;
-    transition: var(--transition);
-}
-.input-group input:focus {
-    border-color: var(--edit);
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-.input-group label {
-    position: absolute;
-    left: 12px;
-    top: 13px;
-    color: var(--text-muted);
-    transition: 0.15s ease all;
-    pointer-events: none;
-    font-size: 13px;
-}
-.input-group input:focus ~ label,
-.input-group input:not(:placeholder-shown) ~ label {
-    top: 3px;
-    left: 12px;
-    font-size: 10px;
-    color: var(--edit);
-    font-weight: 600;
-}
-
-.btnSave {
-    background: var(--primary);
-    color: white;
-    border: none;
-    width: 100%;
-    padding: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-    margin-top: 5px;
-}
-.btnSave:hover { background: #1e293b; }
-
-/* Dynamic List Items UI updates */
-.scroll-list {
-    flex: 1;
-    overflow-y: auto;
-    margin-top: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background: #fff;
-}
-
-.product-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition);
-}
-.product-item:hover { background: var(--bg-main); }
-.product-item strong { color: var(--text-dark); font-size: 14px; }
-
-/* Modern Modals Panel Overlay System */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-.modal .modal-content {
-    width: 90%;
-    max-width: 850px;
-    max-height: 85vh;
-    border-radius: var(--radius);
-    padding: 28px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Cart Panel Interface Controls */
-#cartScanner {
-    color: var(--text-dark) !important;
-    padding: 14px !important;
-    border-radius: var(--radius-sm) !important;
-    font-size: 14px !important;
-    background: #f1f5f9 !important;
-    border: 1px solid var(--border-color) !important;
-    transition: var(--transition);
-}
-#cartScanner:focus {
-    background: #fff !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
-}
-#cartScanner::placeholder { color: var(--text-muted); font-weight: normal; }
-
-.cart-row {
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    padding: 12px 8px;
-    border-bottom: 1px solid var(--border-color);
-}
-.cart-row input[type="number"] {
-    border: 1px solid var(--border-color);
-    padding: 4px;
-    border-radius: 4px;
-    background: var(--bg-main);
-}
-.btn-void {
-    background: #fff;
-    color: var(--danger);
-    border: 1px solid #fee2e2;
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    font-weight: 600;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-}
-.btn-void:hover { background: #fef2f2; border-color: #fca5a5; }
-
-/* Checkout Billing Totals Components */
-.checkout-panel hr {
-    border: 0;
-    border-top: 1px solid var(--border-color);
-    margin: 16px 0;
-}
-#cashRendered {
-    border-radius: var(--radius-sm) !important;
-    border: 1px solid var(--border-color) !important;
-    background: #fff !important;
-    font-weight: 600;
-    padding: 10px !important;
-    transition: var(--transition);
-}
-#cashRendered:focus {
-    border-color: var(--accent) !important;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
-}
-
-.total-display {
-    background: var(--primary);
-    color: white;
-    font-size: 1.75rem;
-    font-weight: 700;
-    text-align: center;
-    padding: 16px;
-    border-radius: var(--radius-sm);
-    margin-top: 16px;
-    box-shadow: none;
-    letter-spacing: -0.02em;
-}
-.btn-complete {
-    background: var(--accent);
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-    border: none;
-    width: 100%;
-    padding: 14px;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-}
-.btn-complete:hover { background: #059669; }
-
-/* Quick System Search Inputs styling override */
-#pSearch, #invSearch {
-    padding: 12px 14px !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-sm) !important;
-    background-color: var(--bg-main) !important;
-    font-size: 14px;
-    transition: var(--transition);
-}
-#pSearch:focus, #invSearch:focus {
-    background-color: #fff !important;
-    border-color: var(--edit) !important;
-    outline: none;
-}
-
-/* Modals Functional Buttons Layouts Grid */
-.modal-content .header-actions .btn-action, 
-.modal-content .header-actions .btn-trigger,
-.modal-content .header-actions button {
-    padding: 10px 16px;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 13px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-/* Telegram Floating Widget Layout */
-#tg-chat-box {
-    border-radius: var(--radius);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border-color);
-}
-.tg-header { background: #0088cc; }
-.tg-send-btn { background: #0088cc; border-radius: var(--radius-sm); }
-#tg-float-btn { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-}
 /* ==========================================================================
-   GLOBAL APP RESPONSIVE LAYOUT CONTEXT
+   GRID WORKSPACE MAIN SYSTEM PANELS 
    ========================================================================== */
-
-/* Base Container using Grid/Flex */
 .app-container {
     display: grid;
-    grid-template-columns: 1.2fr 1.5fr 1.1fr; /* Custom split ratios for desktop PC */
+    grid-template-columns: 1.1fr 1.4fr 1.1fr;
     gap: 16px;
-    height: calc(100vh - 60px); /* Subtracts header bar height */
+    height: calc(100vh - 60px);
     padding: 16px;
     box-sizing: border-box;
-    background-color: var(--bg-main, #f8fafc);
     overflow: hidden;
 }
 
-/* Individual Panel Structural Base */
 .column {
     background: #ffffff;
-    border: 1px solid var(--border-color, #e2e8f0);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 16px;
     box-sizing: border-box;
@@ -466,7 +103,6 @@ body {
     overflow: hidden;
 }
 
-/* Helper Scroll Classes inside Panels */
 .scroll-list {
     flex: 1;
     overflow-y: auto;
@@ -474,93 +110,198 @@ body {
 }
 
 /* ==========================================================================
-   MEDIA QUERY: TABLET LANDSCAPE & PORTRAIT (Max-Width: 1024px)
+   SPACE RECLAIMING INTERMEDIATE FIELDS FORM LAYOUTS
+   ========================================================================== */
+.input-group {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #ffffff;
+    outline: none;
+}
+
+.input-group label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    padding: 0 4px;
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 11px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.btnSave {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btnSave:hover { background: var(--primary-dark); }
+
+.btn-void {
+    background: #fff5f5;
+    color: var(--danger);
+    border: 1px solid #fecaca;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn-void:hover { background: #fee2e2; }
+
+/* ==========================================================================
+   PRODUCT & CHECKOUT INVENTORY RENDER TILES
+   ========================================================================== */
+.product-item, .cart-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 8px;
+    border-bottom: 1px solid #f1f5f9;
+}
+.product-item:hover { background: #f8fafc; cursor: pointer; }
+
+/* ==========================================================================
+   MODAL DIALOG LAYERS STRUCTURE
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+/* ==========================================================================
+   TELEGRAM CONTROL ROOM PIPELINE FLOAT LAYOUT
+   ========================================================================== */
+#tg-float-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0088cc;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 900;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#tg-chat-box {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    height: 380px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    z-index: 900;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+.tg-hidden { display: none !important; }
+
+.tg-header { background: #0088cc; color: white; padding: 12px; font-weight: 600; display: flex; justify-content: space-between; border-radius: 8px 8px 0 0; }
+.tg-body { flex: 1; padding: 12px; overflow-y: auto; background: #f1f5f9; }
+.tg-footer { padding: 8px; display: flex; gap: 6px; border-top: 1px solid var(--border-color); }
+.tg-footer input { flex: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; }
+.tg-send-btn { background: #0088cc; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+
+/* ==========================================================================
+   POS58 THERMAL PRINTER HIDDEN OVERLAY STYLES
+   ========================================================================== */
+#receipt-print {
+    display: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    line-height: 20px;
+    width: 58mm;
+}
+
+@media print {
+    body * { display: none !important; }
+    #receipt-print { display: block !important; width: 58mm !important; }
+}
+
+/* ==========================================================================
+   MEDIA QUERIES RESPONSIVENESS MATRIX BREAKPOINTS
    ========================================================================== */
 @media screen and (max-width: 1024px) {
     .app-container {
-        grid-template-columns: 1fr 1fr; /* Shifts layout to a balanced 2-column grid */
+        grid-template-columns: 1fr 1fr;
         height: auto;
         overflow-y: auto;
         gap: 12px;
         padding: 12px;
     }
-
-    /* Shift checkout panel to span across the bottom full-width */
-    .checkout-panel {
-        grid-column: span 2;
-        height: auto;
-    }
-    
-    .products-panel, .cart-panel {
-        height: 65vh; /* Sets a comfortable scrolling height for tablet views */
-    }
+    .checkout-panel { grid-column: span 2; height: auto; }
+    .products-panel, .cart-panel { height: 60vh; }
 }
 
-/* ==========================================================================
-   MEDIA QUERY: SMARTPHONES / MOBILE TERMINALS (Max-Width: 640px)
-   ========================================================================== */
 @media screen and (max-width: 640px) {
-    /* Adjust Header Navigation for Mobile */
-    .dashboard-header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-        gap: 8px;
-    }
-    
-    .header-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        width: 100%;
-    }
-    
-    .nav-btn {
-        flex: 1 1 calc(50% - 6px); /* Buttons split into 2 rows cleanly on mobile mobile */
-        font-size: 12px;
-        padding: 8px;
-        justify-content: center;
-    }
-
-    /* Collapse the Main Workspace Container into a Single Column Flow */
-    .app-container {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        overflow-y: visible;
-        gap: 16px;
-        padding: 8px;
-    }
-
-    /* Give individual screens realistic standalone operational focus heights */
-    .products-panel {
-        order: 2; /* Moves inventory below the active cart order screen */
-        height: 50vh;
-    }
-
-    .cart-panel {
-        order: 1; /* Keeps active continuous scanner basket on top */
-        height: 55vh;
-    }
-
-    .checkout-panel {
-        order: 3; /* Payment processing finishes up at the baseline fold */
-        height: auto;
-        overflow: visible;
-    }
-
-    /* Re-collapse side-by-side inputs on extremely tight screens */
-    .checkout-panel div[style*="display: flex"] {
-        flex-direction: column !important;
-        gap: 8px !important;
-    }
-    
-    .checkout-panel div[style*="flex-direction: row"] {
-        flex-direction: row !important; /* Forces the lower metrics block to remain horizontal */
-    }
+    .dashboard-header { flex-direction: column; height: auto; padding: 10px; gap: 8px; }
+    .header-actions { flex-wrap: wrap; width: 100%; }
+    .nav-btn { flex: 1 1 calc(50% - 6px); justify-content: center; font-size: 12px; }
+    .app-container { display: flex; flex-direction: column; height: auto; padding: 8px; }
+    .cart-panel { order: 1; height: 50vh; }
+    .products-panel { order: 2; height: 50vh; }
+    .checkout-panel { order: 3; height: auto; }
+    .checkout-panel div[style*="display: flex"] { flex-direction: column !important; gap: 8px !important; }
+    .checkout-panel div[style*="flex-direction: row"] { flex-direction: row !important; }
 }
-	</style>
+</style>
 	
+</head>
 <body>
 
     <div id="login-modal" class="modal-overlay">
@@ -568,63 +309,44 @@ body {
             <div style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;">
                 <i class="fa-solid fa-store"></i>
             </div>
-            <h2 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">MEI CAI STORE</h2>
+            <h2>MEI CAI STORE</h2>
             <p style="margin: 0 0 24px 0; font-size: 13px; color: var(--text-muted);">Please enter terminal credentials to unlock POS</p>
-            
-            <div class="error-msg" id="login-error" style="display: none;">
+            <div class="error-msg" id="login-error" style="display: none; color: var(--danger); margin-bottom: 12px; font-size: 13px;">
                 <i class="fa-solid fa-circle-exclamation"></i> Incorrect Terminal Password
             </div>
-            
-            <input type="password" id="password-input" placeholder="Enter Terminal Password" autocomplete="off">
-            <button id="login-btn">Unlock Terminal</button>
+            <input type="password" id="password-input" placeholder="Enter Terminal Password" autocomplete="off" style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <button id="login-btn" onclick="checkLogin()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Unlock Terminal</button>
         </div>
     </div>
 
     <header class="dashboard-header">
-        <div id="fullscreen-btn">
-            <i class="fa-solid fa-cash-register"></i> MEI CAI STORE <small>v2.0</small>
+        <div id="fullscreen-btn" style="font-weight: 700; color: var(--text-dark); cursor: pointer;">
+            <i class="fa-solid fa-cash-register" style="color: var(--primary);"></i> MEI CAI STORE <small style="font-weight: 400; opacity: 0.7;">v2.0</small>
         </div>
         <div class="header-actions">
-            <button class="nav-btn" onclick="toggleModal('salesModal')">
-                <i class="fa-solid fa-chart-line"></i> Sales History
-            </button>
-            <button class="nav-btn" onclick="toggleModal('inventoryModal')">
-                <i class="fa-solid fa-boxes-stacked"></i> Inventory List
-            </button>
-            <button class="nav-btn" onclick="toggleModal('lowStockModal')">
-                <i class="fa-solid fa-triangle-exclamation"></i> Low Stock
-            </button>
-            <button class="nav-btn" onclick="toggleModal('topProductsModal')">
-                <i class="fa-solid fa-fire"></i> Best Sellers
-            </button>
-            <button class="nav-btn" onclick="openGcashModal()">
-                <i class="fa-solid fa-wallet"></i> GCash Ledger
-            </button>
-            <button class="nav-btn" onclick="openUtangModal()">
-                <i class="fa-solid fa-book-open"></i> Credit Log
-            </button>
-            <button class="nav-btn" onclick="toggleModal('bulkUploadModal')">
-                <i class="fa-solid fa-file-import"></i> Bulk Upload
-            </button>
-            <button class="nav-btn btn-logout" onclick="sendExportAndExit()">
-                <i class="fa-solid fa-power-off"></i> Sign Off
-            </button>
+            <button class="nav-btn" onclick="toggleModal('salesModal')"><i class="fa-solid fa-chart-line"></i> Sales</button>
+            <button class="nav-btn" onclick="toggleModal('inventoryModal')"><i class="fa-solid fa-boxes-stacked"></i> Inventory</button>
+            <button class="nav-btn" onclick="toggleModal('lowStockModal')"><i class="fa-solid fa-triangle-exclamation"></i> Low Stock</button>
+            <button class="nav-btn" onclick="toggleModal('topProductsModal')"><i class="fa-solid fa-fire"></i> Best Sellers</button>
+            <button class="nav-btn" onclick="openGcashModal()"><i class="fa-solid fa-wallet"></i> GCash</button>
+            <button class="nav-btn" onclick="openUtangModal()"><i class="fa-solid fa-book-open"></i> Credit Log</button>
+            <button class="nav-btn" onclick="toggleModal('bulkUploadModal')"><i class="fa-solid fa-file-import"></i> Bulk Upload</button>
+            <button class="nav-btn btn-logout" onclick="sendExportAndExit()"><i class="fa-solid fa-power-off"></i> Sign Off</button>
         </div>
     </header>
 
     <main class="app-container">
         
         <section class="column products-panel">
-            <h3 id="formTitle">Inventory Manager</h3>
-            
+            <h3 id="formTitle" style="margin-top: 0; margin-bottom: 12px;">Inventory Manager</h3>
             <input type="hidden" id="pId">
             <div class="input-group">
                 <input type="text" id="pBarcode" placeholder=" " autocomplete="off">
-                <label><i class="fa-solid fa-barcode"></i> Scan or Type Barcode SKU</label>
+                <label><i class="fa-solid fa-barcode"></i> Barcode SKU</label>
             </div>
             <div class="input-group">
                 <input type="text" id="pName" placeholder=" " autocomplete="off">
-                <label><i class="fa-solid fa-basket-shopping"></i> Complete Product Description Name</label>
+                <label><i class="fa-solid fa-basket-shopping"></i> Product Name</label>
             </div>
             <div style="display: flex; gap: 12px;">
                 <div class="input-group" style="flex: 1;">
@@ -633,42 +355,43 @@ body {
                 </div>
                 <div class="input-group" style="flex: 1;">
                     <input type="number" id="pStock" placeholder=" " autocomplete="off">
-                    <label>Stock Count Unit Qty</label>
+                    <label>Stock Qty</label>
                 </div>
             </div>
 
-            <div style="display: flex; gap: 8px;">
-                <button class="btnSave" onclick="saveProduct()">Commit To Database</button>
-                <button id="btnCancel" class="btn-void" style="display: none; margin-top: 5px; flex: 0.4;" onclick="resetForm()">Cancel</button>
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <button class="btnSave" onclick="saveProduct()" style="flex: 1;">Commit to Database</button>
+                <button id="btnCancel" class="btn-void" style="display: none; flex: 0.4; margin: 0; padding: 10px;" onclick="resetForm()">Cancel</button>
             </div>
 
-            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 20px 0 16px 0;">
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 8px 0 12px 0;">
 
             <div style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
-                <input type="text" id="pSearch" placeholder="🔍 Search catalogue quickly by name or barcode SKU..." oninput="renderProducts()" autocomplete="off">
+                <input type="text" id="pSearch" placeholder="🔍 Search catalogue..." oninput="renderProducts()" autocomplete="off" style="margin-bottom: 10px;">
                 <div class="scroll-list" id="productList"></div>
             </div>
         </section>
 
         <section class="column cart-panel">
-            <h3>Active Transaction Checkout Cart</h3>
-            <input type="text" id="cartScanner" placeholder="⚡ Continuous scan mode active... point barcode laser directly here" onkeypress="if(event.key==='Enter') addToCart(this.value)" autofocus autocomplete="off">
+            <h3 style="margin-top: 0; margin-bottom: 12px;">Active Checkout Cart</h3>
+            <input type="text" id="cartScanner" placeholder="⚡ Scan barcode laser here..." autocomplete="off">
             
-            <div style="display: flex; padding: 12px 8px; font-weight: 700; font-size: 11px; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border-color); margin-top: 12px;">
+            <div style="display: flex; padding: 10px 4px; font-weight: 700; font-size: 11px; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border-color); margin-top: 10px;">
                 <span style="flex: 3.5;">Item Description</span>
-                <span style="flex: 1; text-align: right;">Price</span>
-                <span style="flex: 1; text-align: right;">Qty</span>
-                <span style="flex: 1; text-align: right;">Total</span>
+                <span style="flex: 1.2; text-align: right;">Price</span>
+                <span style="flex: 1.5; text-align: center;">Qty</span>
+                <span style="flex: 1.5; text-align: right;">Total</span>
                 <span style="flex: 1; text-align: right;">Action</span>
             </div>
             
             <div class="scroll-list" id="cartItems" style="margin-top: 0;"></div>
             
-            <button class="btn-void" style="margin-top: 12px;" onclick="voidCart()">
-                <i class="fa-solid fa-trash-can"></i> Flush and Void Entire Transaction Cart
+            <button class="btn-void" style="margin-top: 10px; width: 100%;" onclick="voidCart()">
+                <i class="fa-solid fa-trash-can"></i> Flush and Void Cart
             </button>
         </section>
-<section class="column checkout-panel" style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
+
+        <section class="column checkout-panel" style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
             <h3 style="margin-top: 0; margin-bottom: 10px; flex-shrink: 0; font-size: 13px;">Payment Tender Processing</h3>
             
             <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
@@ -695,7 +418,7 @@ body {
             <div style="display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;">
                 <div>
                     <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Funding Route Channel</label>
-                    <select id="payMethod" style="width: 100%; box-sizing: border-box; padding: 8px; margin: 0; font-size: 13px;">
+                    <select id="payMethod" onchange="handlePayMethodChange()" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px;">
                         <option value="Cash">Cash Transaction Counter Tender</option>
                         <option value="GCash">GCash Instant Digital Remittance</option>
                         <option value="Credit Utang">Credit Utang (Store Account Receivable)</option>
@@ -705,34 +428,31 @@ body {
                 <div style="display: flex; gap: 10px; width: 100%;">
                     <div style="flex: 1.2;">
                         <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Customer Info (Optional)</label>
-                        <input type="text" id="customerName" placeholder="Customer Full Name" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; margin: 0; height: 38px;">
-                        <input type="password" id="customerpassword" style="display: none; width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; margin: 0; height: 38px;" placeholder="PIN Validation">
+                        <input type="text" id="customerName" placeholder="Customer Full Name" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;">
+                        <input type="password" id="customerpassword" style="display: none; width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;" placeholder="PIN Validation">
                     </div>
 
                     <div style="flex: 1;">
                         <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Tender Received (₱)</label>
-                        <input type="number" id="cashRendered" placeholder="0.00" oninput="updateTotals()" autocomplete="off" style="font-size: 16px; font-weight: 700; text-align: right; padding: 6px 10px; width: 100%; box-sizing: border-box; margin: 0; height: 38px;">
+                        <input type="number" id="cashRendered" placeholder="0.00" oninput="updateTotals()" autocomplete="off" style="font-size: 16px; font-weight: 700; text-align: right; padding: 6px 10px; width: 100%; box-sizing: border-box; height: 38px;">
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: auto; padding-top: 10px; flex-shrink: 0; display: flex; flex-direction: column; gap: 10px;">
-                
                 <div style="display: flex; flex-direction: row; gap: 10px; align-items: stretch; width: 100%;">
-                    
                     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; background: #f1f5f9; padding: 10px; border-radius: 6px;">
                         <span style="font-size: 10px; text-transform: uppercase; font-weight: 600; color: var(--text-muted); letter-spacing: 0.02em; margin-bottom: 2px;">Change Due</span>
                         <span id="changeDisplay" style="font-size: 18px; font-weight: 700; color: var(--accent); line-height: 1.2;">₱0.00</span>
                     </div>
 
-                    <div class="total-display" style="flex: 1; padding: 10px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; text-align: left; margin: 0; box-shadow: none;">
+                    <div class="total-display" style="flex: 1; padding: 10px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; text-align: left; background: var(--text-dark); color: white;">
                         <span style="font-size: 10px; text-transform: uppercase; font-weight: 500; opacity: 0.8; letter-spacing: 0.02em; margin-bottom: 2px;">Net Payable Invoice</span>
-                        <span id="summaryTotal" style="font-size: 20px; font-weight: 800; display: block; line-height: 1.2;">₱0.00</span>
+                        <span id="summaryTotal" style="font-size: 20px; font-weight: 800; display: block; line-height: 1.2; color: #10b981;">₱0.00</span>
                     </div>
-
                 </div>
 
-                <button class="btn-complete" style="width: 100%; padding: 12px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700;" onclick="processTransaction()">
+                <button class="btn-complete" style="width: 100%; padding: 12px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;" onclick="processTransaction()">
                     <i class="fa-solid fa-circle-check"></i> Process Checkout & Print
                 </button>
             </div>
@@ -740,16 +460,15 @@ body {
     </main>
 
     <div id="salesModal" class="modal">
-        <div class="modal-content" style="max-width: 900px; display: flex; flex-direction: column;">
+        <div class="modal-content" style="max-width: 900px; display: flex; flex-direction: column; height: 80vh;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-chart-pie"></i> Historical Terminal Gross Performance Metrics</h2>
+                <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-chart-pie"></i> Gross Performance Metrics</h2>
                 <div style="display: flex; gap: 8px; align-items: center;">
                     <select id="salesFilter" onchange="loadSalesHistory()" style="padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px;">
                         <option value="daily">Daily Closed Accounts Batch</option>
                         <option value="weekly">Weekly Operational Report</option>
                         <option value="monthly">Monthly Master Cycle Log</option>
-                        <option value="yearly">Yearly Historical Timeline</option>
-                        <option value="all">Complete Database Ledger Backup Dump</option>
+                        <option value="all">Complete Database Dump</option>
                     </select>
                     <button onclick="exportToCSV()" style="background: #2563eb; color: white;" class="nav-btn"><i class="fa-solid fa-file-csv"></i> Extract CSV</button>
                     <button onclick="toggleModal('salesModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
@@ -758,9 +477,9 @@ body {
             <div style="flex: 1; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
-                        <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color);">
-                            <th style="padding: 12px;">Timeline Sequence Timestamp</th>
-                            <th style="padding: 12px;">Purchased Items Breakdowns Line</th>
+                        <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
+                            <th style="padding: 12px;">Timestamp Sequence</th>
+                            <th style="padding: 12px;">Purchased Items Breakdowns</th>
                             <th style="padding: 12px;">Total Yield</th>
                             <th style="padding: 12px;">Tender Route</th>
                         </tr>
@@ -772,9 +491,9 @@ body {
     </div>
 
     <div id="inventoryModal" class="modal">
-        <div class="modal-content" style="max-width: 900px; display: flex; flex-direction: column;">
+        <div class="modal-content" style="max-width: 900px; display: flex; flex-direction: column; height: 80vh;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-boxes-stacked"></i> Master Physical Stock Parameters List</h2>
+                <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-boxes-stacked"></i> Master Stock Parameters List</h2>
                 <div style="display: flex; gap: 8px;">
                     <button onclick="exportAllStockToCSV()" style="background: #10b981; color: white;" class="nav-btn"><i class="fa-solid fa-file-excel"></i> Extract Full Stock Sheet</button>
                     <button onclick="toggleModal('inventoryModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
@@ -784,12 +503,12 @@ body {
             <div style="flex: 1; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
-                        <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color);">
+                        <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
                             <th style="padding: 12px;">Barcode SKU</th>
-                            <th style="padding: 12px;">Product Structural Label Name</th>
-                            <th style="padding: 12px;">Base Valuation Price</th>
-                            <th style="padding: 12px;">Floor Count Quantities</th>
-                            <th style="padding: 12px;">Total Units Extracted (Sold)</th>
+                            <th style="padding: 12px;">Product Label Name</th>
+                            <th style="padding: 12px;">Base Valuation</th>
+                            <th style="padding: 12px;">Floor Count Qty</th>
+                            <th style="padding: 12px;">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="invBody"></tbody>
@@ -799,11 +518,10 @@ body {
     </div>
 
     <div id="lowStockModal" class="modal">
-        <div class="modal-content" style="max-width: 800px; display: flex; flex-direction: column;">
+        <div class="modal-content" style="max-width: 800px; display: flex; flex-direction: column; height: 70vh;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0; font-size: 20px; color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i> Depleted Inventory Replenishment Alert Board</h2>
+                <h2 style="margin: 0; font-size: 20px; color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i> Replenishment Alerts</h2>
                 <div style="display: flex; gap: 8px;">
-                    <button onclick="exportLowStockToCSV()" style="background: var(--danger); color: white;" class="nav-btn"><i class="fa-solid fa-truck-ramp-box"></i> Save Restock Order Sheet</button>
                     <button onclick="toggleModal('lowStockModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
                 </div>
             </div>
@@ -811,11 +529,9 @@ body {
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
                         <tr style="background: #fef2f2; border-bottom: 2px solid #fee2e2;">
-                            <th style="padding: 12px; color: var(--danger)">SKU Part Number</th>
-                            <th style="padding: 12px; color: var(--danger)">Product Name Block</th>
-                            <th style="padding: 12px; color: var(--danger)">Unit Valuation</th>
+                            <th style="padding: 12px; color: var(--danger)">SKU Barcode</th>
+                            <th style="padding: 12px; color: var(--danger)">Product Name</th>
                             <th style="padding: 12px; color: var(--danger)">Current Units Count Remaining</th>
-                            <th style="padding: 12px; color: var(--danger)">Historical Sold Count</th>
                         </tr>
                     </thead>
                     <tbody id="lowStockBody"></tbody>
@@ -830,7 +546,7 @@ body {
                 <h2 style="margin: 0; font-size: 18px;"><i class="fa-solid fa-ranking-star"></i> Top 5 Fast Moving Velocity</h2>
                 <button onclick="toggleModal('topProductsModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
             </div>
-            <div id="topProductsList" style="border: 1px solid var(--border-color); border-radius: 6px; background: #fff;"></div>
+            <div id="topProductsList" style="border: 1px solid var(--border-color); border-radius: 6px; background: #fff; padding: 10px;"></div>
         </div>
     </div>
 
@@ -838,19 +554,16 @@ body {
         <div class="modal-content" style="max-width: 480px; text-align: center;">
             <div style="font-size: 2.5rem; color: #4f46e5; margin-bottom: 12px;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
             <h2 style="margin: 0 0 8px 0; font-size: 18px;">Bulk Item Ingestion Wizard</h2>
-            <p style="margin: 0 0 20px 0; font-size: 13px; color: var(--text-muted);">Upload a standard comma-separated matrix file <br>Format guidelines: <code>BARCODE,PRODUCT_NAME,PRICE,STOCK</code></p>
-            
+            <p style="margin: 0 0 20px 0; font-size: 13px; color: var(--text-muted);">Upload standard comma-separated matrix file <br>Format guidelines: <code>BARCODE,PRODUCT_NAME,PRICE,STOCK</code></p>
             <div style="border: 2px dashed var(--border-color); padding: 24px; border-radius: 8px; background: var(--bg-main); margin-bottom: 20px;">
-                <input type="file" id="bulkFileInput" accept=".csv" style="font-size: 13px; color: var(--text-muted);">
+                <input type="file" id="bulkFileInput" accept=".csv" onchange="enableUploadButton()">
             </div>
-
             <div id="uploadStatus" style="display: none; font-size: 13px; margin-bottom: 16px; font-weight: 600; color: #4f46e5;">
                 <i class="fa-solid fa-spinner fa-spin"></i> Processing and writing records lines... (<span id="processCount">0</span> items logged)
             </div>
-
             <div style="display: flex; gap: 8px; justify-content: flex-end;">
                 <button onclick="toggleModal('bulkUploadModal')" class="nav-btn" style="background: transparent; border-color: transparent;">Cancel</button>
-                <button id="uploadBtn" class="nav-btn" style="background: #4f46e5; color: white;" onclick="processBulkUpload()" disabled>Execute Heavy Batch Upload</button>
+                <button id="uploadBtn" class="nav-btn" style="background: #4f46e5; color: white;" onclick="processBulkUpload()" disabled>Execute Batch Upload</button>
             </div>
         </div>
     </div>
@@ -858,30 +571,28 @@ body {
     <div id="passModal" class="modal">
         <div class="modal-content" style="max-width: 340px; text-align: center;">
             <div style="font-size: 2rem; color: var(--warning); margin-bottom: 12px;"><i class="fa-solid fa-shield-halved"></i></div>
-            <h2 style="margin: 0 0 6px 0; font-size: 18px;">Privilege Verification Required</h2>
-            <p style="margin: 0 0 20px 0; font-size: 13px; color: var(--text-muted);">Please confirm manager authorization PIN to confirm modifications</p>
-            
-            <input type="password" id="managerPinInput" placeholder="••••" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 0.3em; font-family: monospace;">
-            
-            <div style="display: flex; gap: 8px; margin-top: 4px;">
+            <h2 style="margin: 0 0 6px 0; font-size: 18px;">Privilege Verification</h2>
+            <p style="margin: 0 0 20px 0; font-size: 13px; color: var(--text-muted);">Please confirm manager authorization PIN</p>
+            <input type="password" id="managerPinInput" placeholder="••••" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 0.3em; font-family: monospace; width: 80%; padding: 8px; margin-bottom: 16px;">
+            <div style="display: flex; gap: 8px;">
                 <button onclick="toggleModal('passModal')" class="nav-btn" style="flex: 1; justify-content: center;">Abort</button>
-                <button id="submitPin" class="nav-btn" style="flex: 1; background: var(--warning); color: white; border-color: var(--warning); justify-content: center;">Authorize</button>
+                <button onclick="verifyDiscountPin()" class="nav-btn" style="flex: 1; background: var(--warning); color: white; border-color: var(--warning); justify-content: center;">Authorize</button>
             </div>
         </div>
     </div>
 
     <div id="utangModal" class="modal">
-        <div class="modal-content" style="max-width: 700px; display: flex; flex-direction: column;">
+        <div class="modal-content" style="max-width: 700px; display: flex; flex-direction: column; height: 75vh;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="margin: 0; font-size: 18px;"><i class="fa-solid fa-book-bookmark"></i> Outstanding Ledger Receivables (Credit Log)</h2>
-                <button onclick="closeUtangModal()" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
+                <button onclick="toggleModal('utangModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
             </div>
-            <div id="utangListBody" style="flex: 1; overflow-y: auto; max-height: 55vh; padding-right: 4px;"></div>
+            <div id="utangListBody" style="flex: 1; overflow-y: auto;"></div>
         </div>
     </div>
 
     <div id="modal-2" class="modal">
-        <div class="modal-content" style="max-width: 1050px; display: flex; flex-direction: column;">
+        <div class="modal-content" style="max-width: 1050px; display: flex; flex-direction: column; height: 85vh;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-wallet"></i> GCash Business Ledger Center</h2>
                 <button onclick="closeGcashModal()" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
@@ -889,85 +600,77 @@ body {
             
             <div style="display: flex; gap: 20px; flex: 1; min-height: 0;">
                 <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: 1.1; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
-                    <h4 style="margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-size: 11px;">Log New GCash Remittance</h4>
-                    
                     <div style="display: flex; gap: 10px; margin-bottom: 6px;">
                         <label id="gcashInLabel" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border: 1px solid #3b82f6; background: #eff6ff; color: #1d4ed8; font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 13px;">
-                            <input type="radio" name="gcashType" value="GCASH IN" checked onchange="toggleGcashType()" style="display: none;"> <i class="fa-solid fa-arrow-down-left"></i> GCash IN
+                            <input type="radio" name="gcashType" value="GCASH IN" checked onchange="toggleGcashType()" style="display: none;"> GCash IN
                         </label>
                         <label id="gcashOutLabel" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border: 1px solid var(--border-color); background: #f8fafc; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 13px;">
-                            <input type="radio" name="gcashType" value="GCASH OUT" onchange="toggleGcashType()" style="display: none;"> <i class="fa-solid fa-arrow-up-right"></i> GCash OUT
+                            <input type="radio" name="gcashType" value="GCASH OUT" onchange="toggleGcashType()" style="display: none;"> GCash OUT
                         </label>
                     </div>
 
                     <div class="input-group">
                         <input type="text" id="gcashMobile" pattern="[0-9]{11}" placeholder=" " required autocomplete="off">
-                        <label>Target 11-Digit Mobile Number Number</label>
+                        <label>Target 11-Digit Mobile Number</label>
                     </div>
                     <div class="input-group">
                         <input type="number" id="gcashAmount" step="0.01" placeholder=" " required autocomplete="off">
-                        <label>Face Remittance Value Tender Amount (₱)</label>
+                        <label>Tender Value Amount (₱)</label>
                     </div>
                     <div class="input-group">
                         <input type="text" id="gcashCustomerName" placeholder=" " required autocomplete="off">
-                        <label>Sender / Account Holder Name</label>
+                        <label>Sender / Account Name</label>
                     </div>
                     <div class="input-group">
                         <input type="text" id="gcashRefNo" placeholder=" " required autocomplete="off">
-                        <label>Instanct 13-Digit Trans. Inst. Reference ID</label>
+                        <label>13-Digit Trans. Ref ID</label>
                     </div>
 
-                    <button type="submit" class="btnSave" style="margin-top: auto; background: #0088cc;"><i class="fa-solid fa-floppy-disk"></i> Save Remittance Entry</button>
+                    <button type="submit" class="btnSave" style="margin-top: auto; background: #0088cc;"><i class="fa-solid fa-floppy-disk"></i> Save Entry</button>
                 </form>
 
                 <div style="flex: 2; display: flex; flex-direction: column;">
                     <div style="display: flex; gap: 6px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; justify-content: space-between; align-items: center;">
                         <div style="display: flex; gap: 4px; background: #eee; padding: 3px; border-radius: 6px;">
-                            <button type="button" class="nav-btn btn-filter active" onclick="changeFilter('daily', this)" style="padding: 6px 12px; font-size: 12px; border: 0; background: transparent;">Daily</button>
-                            <button type="button" class="nav-btn btn-filter" onclick="changeFilter('weekly', this)" style="padding: 6px 12px; font-size: 12px; border: 0; background: transparent;">Weekly</button>
-                            <button type="button" class="nav-btn btn-filter" onclick="changeFilter('monthly', this)" style="padding: 6px 12px; font-size: 12px; border: 0; background: transparent;">Monthly</button>
-                            <button type="button" class="nav-btn btn-filter" onclick="changeFilter('all', this)" style="padding: 6px 12px; font-size: 12px; border: 0; background: transparent;">All Time</button>
+                            <button type="button" class="nav-btn btn-filter active" onclick="changeGcashFilter('daily', this)">Daily</button>
+                            <button type="button" class="nav-btn btn-filter" onclick="changeGcashFilter('weekly', this)">Weekly</button>
+                            <button type="button" class="nav-btn btn-filter" onclick="changeGcashFilter('all', this)">All</button>
                         </div>
-                        <div style="font-size: 12px; font-weight: 700; color: #0088cc; background: #e0f2fe; padding: 4px 10px; border-radius: 20px;">Live Sync Terminal Active</div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
                         <div style="background: #eff6ff; padding: 12px; border-radius: 6px; border: 1px solid #bfdbfe;">
-                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1e40af; display: block;">Combined Inflows</span>
+                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1e40af; display: block;">Inflows</span>
                             <strong id="inAmountSum" style="font-size: 16px; color: #1d4ed8;">₱0.00</strong>
-                            <small id="inTxCount" style="display: block; color: #1e40af; font-size: 11px; margin-top: 2px;">Count: 0</small>
-                            <div style="margin-top: 4px; font-size: 11px; color: #1e40af; font-weight: 600;">Earned Commission: <span id="inProfitSum" style="font-weight: 700;">₱0.00</span></div>
+                            <div style="font-size: 11px; margin-top: 4px;">Comms: <span id="inProfitSum">₱0.00</span></div>
                         </div>
                         <div style="background: #fef2f2; padding: 12px; border-radius: 6px; border: 1px solid #fca5a5;">
-                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #991b1b; display: block;">Combined Outflows</span>
+                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #991b1b; display: block;">Outflows</span>
                             <strong id="outAmountSum" style="font-size: 16px; color: #b91c1c;">₱0.00</strong>
-                            <small id="outTxCount" style="display: block; color: #991b1b; font-size: 11px; margin-top: 2px;">Count: 0</small>
-                            <div style="margin-top: 4px; font-size: 11px; color: #991b1b; font-weight: 600;">Earned Commission: <span id="outProfitSum" style="font-weight: 700;">₱0.00</span></div>
+                            <div style="font-size: 11px; margin-top: 4px;">Comms: <span id="outProfitSum">₱0.00</span></div>
                         </div>
                         <div style="background: #f0fdf4; padding: 12px; border-radius: 6px; border: 1px solid #bbf7d0;">
-                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #166534; display: block;">Total Consolidated Summary</span>
+                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #166534; display: block;">Consolidated Pool</span>
                             <strong id="totalAmountSum" style="font-size: 16px; color: #15803d;">₱0.00</strong>
-                            <small id="totalTxCount" style="display: block; color: #166534; font-size: 11px; margin-top: 2px;">Total: 0</small>
-                            <div style="margin-top: 4px; font-size: 11px; color: #166534; font-weight: 600;">Net Comms Pool: <span id="totalProfitSum" style="font-weight: 700; color: var(--accent);">₱0.00</span></div>
+                            <div style="font-size: 11px; margin-top: 4px; color: var(--accent);">Net Profit: <span id="totalProfitSum">₱0.00</span></div>
                         </div>
                     </div>
 
                     <div style="flex: 1; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
-                        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
                             <thead>
                                 <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
-                                    <th style="padding: 10px;">Date & Time</th>
-                                    <th style="padding: 10px;">Category</th>
-                                    <th style="padding: 10px;">Face Value Amount</th>
-                                    <th style="padding: 10px;">Mobile Node No</th>
-                                    <th style="padding: 10px;">Depositor/Reference</th>
-                                    <th style="padding: 10px;">Comms Net</th>
+                                    <th style="padding: 10px;">Timestamp</th>
+                                    <th style="padding: 10px;">Type</th>
+                                    <th style="padding: 10px;">Amount</th>
+                                    <th style="padding: 10px;">Mobile No</th>
+                                    <th style="padding: 10px;">Comms</th>
                                 </tr>
                             </thead>
                             <tbody id="transactionTableBody"></tbody>
                         </table>
                         <div id="emptyState" style="text-align: center; padding: 40px; color: var(--text-muted); display: none;">
-                            <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 8px; display: block;"></i> Zero recorded GCash remittance actions found.
+                            <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 8px; display: block;"></i> Zero recorded GCash remittance actions.
                         </div>
                     </div>
                 </div>
@@ -976,20 +679,20 @@ body {
     </div>
 
     <div id="alertModal" class="modal" style="z-index: 10001;">
-        <div id="alert-box" class="modal-content" style="max-width: 380px; text-align: center; border-top: 6px solid var(--accent); animation: slideUp 0.25s ease;">
+        <div id="alert-box" class="modal-content" style="max-width: 380px; text-align: center; border-top: 6px solid var(--accent);">
             <div id="alertIcon" style="font-size: 2.5rem; margin-bottom: 12px;"></div>
             <p id="alertMsg" style="margin: 0 0 20px 0; font-size: 14px; font-weight: 500; color: var(--text-dark); line-height: 1.4;"></p>
-            <button onclick="closeAlert()" class="btnSave" style="margin: 0; padding: 10px;">Acknowledge & Confirm</button>
+            <button onclick="closeAlert()" class="btnSave" style="margin: 0; padding: 10px; width: 100%;">Acknowledge</button>
         </div>
     </div>
 
     <div id="confirmModal" class="modal" style="z-index: 10000;">
         <div class="modal-content" style="max-width: 400px; text-align: center;">
             <div style="font-size: 2.5rem; color: #64748b; margin-bottom: 12px;"><i class="fa-solid fa-circle-question"></i></div>
-            <h3 style="margin: 0 0 8px 0; font-size: 18px;">Critical Confirmation</h3>
-            <p id="confirmMsg" style="margin: 0 0 24px 0; font-size: 14px; color: var(--text-muted); line-height: 1.4;"></p>
-            <div style="display: flex; gap: 8px; justify-content: center;">
-                <button onclick="closeConfirm()" class="nav-btn" style="flex: 1; justify-content: center;">Abort Action</button>
+            <h3 style="margin: 0 0 8px 0; font-size: 18px;">System Confirmation</h3>
+            <p id="confirmMsg" style="margin: 0 0 24px 0; font-size: 14px; color: var(--text-muted);"></p>
+            <div style="display: flex; gap: 8px;">
+                <button onclick="closeConfirm()" class="nav-btn" style="flex: 1; justify-content: center;">Abort</button>
                 <button id="confirmYes" class="nav-btn" style="flex: 1; background: var(--danger); color: white; border-color: var(--danger); justify-content: center;">Proceed</button>
             </div>
         </div>
@@ -1002,47 +705,48 @@ body {
     </div>
     <div id="tg-chat-box" class="tg-hidden">
         <div class="tg-header">
-            <span><i class="fa-brands fa-telegram"></i> Telegram Gateway Hub</span>
+            <span><i class="fa-brands fa-telegram"></i> Telegram Hub</span>
             <span onclick="toggleTGChat()" style="cursor: pointer;"><i class="fa-solid fa-minus"></i></span>
         </div>
         <div class="tg-body" id="tg-messages-box">
-            <p style="margin: 0; color: var(--text-muted); font-size: 12px; text-align: center; font-style: italic;">Operational messaging service online...</p>
+            <p style="margin: 0; color: var(--text-muted); font-size: 12px; text-align: center; font-style: italic;">Gateway link connected...</p>
         </div>
         <div class="tg-footer">
-            <input type="text" id="tg-input-field" placeholder="Enter message text lines..." autocomplete="off">
+            <input type="text" id="tg-input-field" placeholder="Type report line..." autocomplete="off">
             <button class="tg-send-btn" onclick="sendTelegramMessageDirect()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </div>
 
     <script>
-	// --- SYSTEM LOGIC CONFIGURATIONS ---
-const ADMIN_PASSWORD = "123"; 
-const MANAGER_PIN = "0000";   
+	// ==========================================================================
+// CORE CONSTANTS CONFIGURATIONS & MASTER DATABASE INITIALIZATION
+// ==========================================================================
+const DB_NAME = "MeiCaiStoreDB_v2";
+const DB_VERSION = 1;
+const MANAGER_PIN = "2026"; // Security clearance signature PIN validation
+const TELEGRAM_BOT_TOKEN = "7294819402:AAH93810482019482019481029481029481"; // Placeholder values 
+const TELEGRAM_CHAT_ID = "6194019482"; 
 
-let db;
+let db = null;
 let cart = [];
-let appliedDiscount = 0;
-let currentGcashFilter = 'daily';
+let currentDiscount = 0;
+let selectedGcashFilter = 'daily';
 
-// --- INITIALIZE DATA STORAGE (IndexedDB Engine) ---
 document.addEventListener("DOMContentLoaded", () => {
-    initDatabase();
-    setupEventListeners();
+    initIndexedDB();
+    setupScannerHook();
 });
 
-function initDatabase() {
-    const request = indexedDB.open("MeiCaiStoreDB", 2);
-
-    request.onerror = (e) => console.error("Database connection failure:", e);
+// INITIALIZE INDEXEDDB
+function initIndexedDB() {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onerror = (e) => triggerAlert("Database initialization failure error context", "error");
     request.onsuccess = (e) => {
         db = e.target.result;
         renderProducts();
-        updateTotals();
     };
-
     request.onupgradeneeded = (e) => {
         let database = e.target.result;
-        
         if (!database.objectStoreNames.contains("products")) {
             database.createObjectStore("products", { keyPath: "id", autoIncrement: true });
         }
@@ -1052,32 +756,17 @@ function initDatabase() {
         if (!database.objectStoreNames.contains("gcash")) {
             database.createObjectStore("gcash", { keyPath: "id", autoIncrement: true });
         }
-        if (!database.objectStoreNames.contains("utang")) {
-            database.createObjectStore("utang", { keyPath: "id", autoIncrement: true });
-        }
     };
 }
 
-function setupEventListeners() {
-    document.getElementById("login-btn").addEventListener("click", verifySystemAccess);
-    document.getElementById("password-input").addEventListener("keypress", (e) => {
-        if (e.key === "Enter") verifySystemAccess();
-    });
-
-    document.getElementById("bulkFileInput").addEventListener("change", function() {
-        const uploadBtn = document.getElementById("uploadBtn");
-        if(this.files.length > 0) {
-            uploadBtn.style.opacity = "1";
-            uploadBtn.disabled = false;
-        }
-    });
-}
-
-// --- ACCESS CONTROL OVERLAYS ---
-function verifySystemAccess() {
-    const passInput = document.getElementById("password-input").value;
-    if (passInput === ADMIN_PASSWORD) {
+// ==========================================================================
+// CENTRALIZED SYSTEM AUTHENTICATION
+// ==========================================================================
+function checkLogin() {
+    const pin = document.getElementById("password-input").value;
+    if (pin === MANAGER_PIN) {
         document.getElementById("login-modal").style.display = "none";
+        document.getElementById("cartScanner").focus();
     } else {
         const err = document.getElementById("login-error");
         err.style.display = "block";
@@ -1085,23 +774,9 @@ function verifySystemAccess() {
     }
 }
 
-function toggleModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    
-    if (modal.style.display === "flex" || modal.style.display === "block") {
-        modal.style.display = "none";
-    } else {
-        modal.style.display = (modalId === 'salesModal' || modalId === 'inventoryModal' || modalId === 'lowStockModal') ? "block" : "flex";
-        if(modalId === 'salesModal') loadSalesHistory();
-        if(modalId === 'inventoryModal') searchInventory();
-        if(modalId === 'lowStockModal') loadLowStockReport();
-        if(modalId === 'topProductsModal') renderTopProducts();
-        if(modalId === 'topProducts1Modal') fetchGcashLedger();
-    }
-}
-
-// --- INVENTORY MANAGEMENT OPERATIONS ---
+// ==========================================================================
+// DATA ENGINE METHOD MANAGEMENT PIPELINES (CRUD)
+// ==========================================================================
 function saveProduct() {
     const id = document.getElementById("pId").value;
     const barcode = document.getElementById("pBarcode").value.trim();
@@ -1109,70 +784,61 @@ function saveProduct() {
     const price = parseFloat(document.getElementById("pPrice").value) || 0;
     const stock = parseInt(document.getElementById("pStock").value) || 0;
 
-    if (!barcode || !name) {
-        showAlert("error", "Please fill in all standard product identifiers!");
+    if (!barcode || !name || price <= 0) {
+        triggerAlert("Please fill in all product registration parameters securely.", "warning");
         return;
     }
 
-    const transaction = db.transaction(["products"], "readwrite");
-    const store = transaction.objectStore("products");
+    const tx = db.transaction("products", "readwrite");
+    const store = tx.objectStore("products");
+    
+    const item = { barcode, name, price, stock };
+    if (id) item.id = parseInt(id);
 
-    const itemPayload = { barcode, name, price, stock, sold: 0 };
-    if (id) itemPayload.id = parseInt(id);
-
-    const request = store.put(itemPayload);
+    const request = store.put(item);
     request.onsuccess = () => {
-        showAlert("success", "Product profile successfully committed!");
+        triggerAlert("Product parameter recorded to database cleanly.", "success");
         resetForm();
         renderProducts();
     };
 }
 
 function renderProducts() {
-    const searchVal = document.getElementById("pSearch").value.toLowerCase();
-    const listContainer = document.getElementById("productList");
-    listContainer.innerHTML = "";
+    const parent = document.getElementById("productList");
+    if (!parent || !db) return;
+    parent.innerHTML = "";
 
-    const store = db.transaction(["products"], "readonly").objectStore("products");
+    const query = document.getElementById("pSearch").value.toLowerCase();
+    const store = db.transaction("products", "readonly").objectStore("products");
+
     store.openCursor().onsuccess = (e) => {
         const cursor = e.target.result;
         if (cursor) {
-            const item = cursor.value;
-            if (item.name.toLowerCase().includes(searchVal) || item.barcode.includes(searchVal)) {
-                const itemDiv = document.createElement("div");
-                itemDiv.className = "product-item";
-                itemDiv.innerHTML = `
-                    <div>
-                        <strong>${item.name}</strong><br>
-                        <small style="color:var(--text-muted); font-size:11px;">SKU: ${item.barcode} | Stock: <span style="font-weight:600; color:${item.stock < 10 ? 'var(--danger)':'var(--text-dark)'}">${item.stock}</span></small>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <span style="font-weight:700; color:var(--primary); font-size:14px;">₱${item.price.toFixed(2)}</span>
-                        <button onclick="editProduct(${item.id}); event.stopPropagation();" style="background:#f1f5f9; color:var(--text-dark); border:1px solid var(--border-color); padding:6px 10px; border-radius:6px; cursor:pointer; transition:var(--transition);"><i class="fas fa-edit" style="color:var(--text-muted)"></i></button>
-                    </div>
+            const v = cursor.value;
+            if (v.name.toLowerCase().includes(query) || v.barcode.includes(query)) {
+                const div = document.createElement("div");
+                div.className = "product-item";
+                div.innerHTML = `
+                    <div style="flex:3;"><strong>${v.name}</strong><br><small style="color:var(--text-muted);">${v.barcode}</small></div>
+                    <div style="flex:1; text-align:right; font-weight:600;">₱${v.price.toFixed(2)}</div>
+                    <div style="flex:1; text-align:right; color:${v.stock <= 5 ? 'var(--danger)':'var(--text-dark)'}; font-weight:700;">${v.stock} Pcs</div>
                 `;
-                itemDiv.onclick = () => addToCart(item.barcode);
-                listContainer.appendChild(itemDiv);
+                div.onclick = () => loadProductToForm(v);
+                parent.appendChild(div);
             }
             cursor.continue();
         }
     };
 }
 
-function editProduct(id) {
-    const store = db.transaction(["products"], "readonly").objectStore("products");
-    store.get(id).onsuccess = (e) => {
-        const item = e.target.result;
-        if (item) {
-            document.getElementById("pId").value = item.id;
-            document.getElementById("pBarcode").value = item.barcode;
-            document.getElementById("pName").value = item.name;
-            document.getElementById("pPrice").value = item.price;
-            document.getElementById("pStock").value = item.stock;
-            document.getElementById("formTitle").innerText = "EDIT MODE";
-            document.getElementById("btnCancel").style.display = "inline-block";
-        }
-    };
+function loadProductToForm(item) {
+    document.getElementById("pId").value = item.id;
+    document.getElementById("pBarcode").value = item.barcode;
+    document.getElementById("pName").value = item.name;
+    document.getElementById("pPrice").value = item.price;
+    document.getElementById("pStock").value = item.stock;
+    document.getElementById("formTitle").innerText = "Modify Registered Item";
+    document.getElementById("btnCancel").style.display = "inline-block";
 }
 
 function resetForm() {
@@ -1181,330 +847,493 @@ function resetForm() {
     document.getElementById("pName").value = "";
     document.getElementById("pPrice").value = "";
     document.getElementById("pStock").value = "";
-    document.getElementById("formTitle").innerText = "INVENTORY MANAGER";
+    document.getElementById("formTitle").innerText = "Inventory Manager";
     document.getElementById("btnCancel").style.display = "none";
 }
 
-// --- CART & SYSTEM POS CHECKOUT ---
-function addToCart(barcode) {
-    if (!barcode) return;
-    const store = db.transaction(["products"], "readonly").objectStore("products");
-    
+// ==========================================================================
+// CHECKOUT CART PROCESSING & BARCODE HOOKS
+// ==========================================================================
+function setupScannerHook() {
+    const input = document.getElementById("cartScanner");
+    input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            const sku = input.value.trim();
+            if (sku) evaluateBarcodeCart(sku);
+            input.value = "";
+        }
+    });
+}
+
+function evaluateBarcodeCart(sku) {
+    const store = db.transaction("products", "readonly").objectStore("products");
     let found = false;
     store.openCursor().onsuccess = (e) => {
         const cursor = e.target.result;
         if (cursor) {
-            if (cursor.value.barcode === barcode.trim()) {
-                const item = cursor.value;
+            if (cursor.value.barcode === sku) {
+                addItemToCartMemory(cursor.value);
                 found = true;
-
-                const cartIdx = cart.findIndex(c => c.id === item.id);
-                if (cartIdx > -1) {
-                    if(cart[cartIdx].qty >= item.stock) {
-                        showAlert("warning", "Insufficient physical quantity available on inventory stock floor!");
-                        return;
-                    }
-                    cart[cartIdx].qty++;
-                } else {
-                    if(item.stock <= 0) {
-                        showAlert("warning", "Item is totally depleted from store inventory counts!");
-                        return;
-                    }
-                    cart.push({ ...item, qty: 1 });
-                }
-                document.getElementById("cartScanner").value = "";
-                renderCart();
                 return;
             }
             cursor.continue();
         } else if (!found) {
-            showAlert("error", "Product Barcode sequence unrecognized in network parameters.");
-            document.getElementById("cartScanner").value = "";
+            triggerAlert("No product matched scanned SKU barcode code lines.", "warning");
         }
     };
 }
 
-function renderCart() {
-    const cartBox = document.getElementById("cartItems");
-    cartBox.innerHTML = "";
+function addItemToCartMemory(item) {
+    const existing = cart.find(x => x.id === item.id);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ ...item, qty: 1 });
+    }
+    renderCart();
+}
 
+function renderCart() {
+    const container = document.getElementById("cartItems");
+    container.innerHTML = "";
+    
     cart.forEach((item, index) => {
         const row = document.createElement("div");
         row.className = "cart-row";
         row.innerHTML = `
-            <span style="flex: 3.5; text-align:left; padding-left:5px;"><b>${item.name}</b></span>
-            <span style="flex: 1; text-align: right; color:var(--text-muted);">₱${item.price.toFixed(2)}</span>
-            <span style="flex: 1; text-align: right;">
-                <input type="number" value="${item.qty}" min="1" onchange="updateCartQty(${index}, this.value)" style="width:45px; text-align:center; padding:3px; font-weight:600;">
+            <span style="flex:3.5;"><strong>${item.name}</strong></span>
+            <span style="flex:1.2; text-align:right;">₱${item.price.toFixed(2)}</span>
+            <span style="flex:1.5; text-align:center; display:flex; gap:4px; justify-content:center;">
+                <button onclick="changeCartQty(${index},-1)" style="padding:2px 6px;">-</button>
+                <span>${item.qty}</span>
+                <button onclick="changeCartQty(${index},1)" style="padding:2px 6px;">+</button>
             </span>
-            <span style="flex: 1; text-align: right; font-weight:700; color:var(--primary);">₱${(item.price * item.qty).toFixed(2)}</span>
-            <span style="flex: 1; text-align: right;">
-                <button onclick="removeFromCart(${index})" style="background:#fff; border:1px solid #fee2e2; color:var(--danger); border-radius:6px; padding:4px 8px; cursor:pointer; transition:var(--transition);"><i class="fas fa-trash"></i></button>
-            </span>
+            <span style="flex:1.5; text-align:right; font-weight:600;">₱${(item.price * item.qty).toFixed(2)}</span>
+            <span style="flex:1; text-align:right;"><button onclick="removeCartItem(${index})" style="color:var(--danger); border:none; background:transparent;"><i class="fa-solid fa-trash"></i></button></span>
         `;
-        cartBox.appendChild(row);
+        container.appendChild(row);
     });
     updateTotals();
 }
 
-function updateCartQty(index, value) {
-    const qty = parseInt(value) || 1;
-    const item = cart[index];
-    
-    const store = db.transaction(["products"], "readonly").objectStore("products");
-    store.get(item.id).onsuccess = (e) => {
-        const origProduct = e.target.result;
-        if(qty > origProduct.stock) {
-            showAlert("warning", `Limited store quantities! Caps at: ${origProduct.stock}`);
-            cart[index].qty = origProduct.stock;
-        } else {
-            cart[index].qty = qty;
-        }
-        renderCart();
-    };
+function changeCartQty(index, offset) {
+    cart[index].qty += offset;
+    if (cart[index].qty <= 0) cart.splice(index, 1);
+    renderCart();
 }
 
-function removeFromCart(index) {
+function removeCartItem(index) {
     cart.splice(index, 1);
     renderCart();
 }
 
 function voidCart() {
-    if (cart.length === 0) return;
-    showConfirm("Are you completely sure you want to clear and void this transaction?", () => {
+    triggerConfirm("Are you sure you want to void this transaction?", () => {
         cart = [];
-        appliedDiscount = 0;
-        document.getElementById("customerName").value = "";
-        document.getElementById("customerpassword").value = "";
+        currentDiscount = 0;
         renderCart();
     });
 }
 
+// ==========================================================================
+// FINANCIAL LEDGER FORM INTERACTION RULES
+// ==========================================================================
 function updateTotals() {
-    let totalItems = 0;
-    let subtotal = 0;
+    let subtotal = cart.reduce((acc, x) => acc + (x.price * x.qty), 0);
+    let qtyCount = cart.reduce((acc, x) => acc + x.qty, 0);
+    let discount = subtotal * currentDiscount;
+    let total = subtotal - discount;
 
-    cart.forEach(item => {
-        totalItems += item.qty;
-        subtotal += (item.price * item.qty);
-    });
-
-    const discountAmount = subtotal * appliedDiscount;
-    const finalTotal = subtotal - discountAmount;
-    const cashRendered = parseFloat(document.getElementById("cashRendered").value) || 0;
-    const computedChange = cashRendered > 0 ? Math.max(0, cashRendered - finalTotal) : 0;
-
-    document.getElementById("summaryQty").innerText = totalItems;
+    document.getElementById("summaryQty").innerText = qtyCount;
     document.getElementById("summarySubtotal").innerText = subtotal.toFixed(2);
-    document.getElementById("discountLabel").innerText = discountAmount.toFixed(2);
-    document.getElementById("summaryTotal").innerText = `₱${finalTotal.toFixed(2)}`;
-    document.getElementById("changeDisplay").innerText = `₱${computedChange.toFixed(2)}`;
+    document.getElementById("discountLabel").innerText = discount.toFixed(2);
+    document.getElementById("summaryTotal").innerText = `₱${total.toFixed(2)}`;
+
+    let cash = parseFloat(document.getElementById("cashRendered").value) || 0;
+    let change = cash - total;
+    document.getElementById("changeDisplay").innerText = change > 0 ? `₱${change.toFixed(2)}` : "₱0.00";
 }
 
-// --- PASSWORD AND PRIVILEGE BYPASS SECURITY CHANNELS ---
-function askDiscountPassword() {
-    if (cart.length === 0) {
-        showAlert("error", "Establish an active cart register baseline before computing metrics reductions!");
-        return;
+function handlePayMethodChange() {
+    const method = document.getElementById("payMethod").value;
+    const pinField = document.getElementById("customerpassword");
+    if (method === "Credit Utang") {
+        pinField.style.display = "block";
+        document.getElementById("customerName").placeholder = "Customer Name (Required)";
+    } else {
+        pinField.style.display = "none";
+        document.getElementById("customerName").placeholder = "Customer Identity Full Name (Optional)";
     }
-    document.getElementById("passModal").style.display = "flex";
-    document.getElementById("managerPinInput").value = "";
-    document.getElementById("submitPin").onclick = () => {
-        const pin = document.getElementById("managerPinInput").value;
-        if (pin === MANAGER_PIN) {
-            appliedDiscount = 0.20; 
-            document.getElementById("passModal").style.display = "none";
-            updateTotals();
-            showAlert("success", "Managerial verification successful. Authorized 20% discount applied.");
-        } else {
-            showAlert("error", "The code submitted does not verify permissions access profiles!");
-        }
-    };
 }
 
-// --- TRANSACTION PROCEDURES ENGINE ---
+function askDiscountPassword() {
+    toggleModal("passModal");
+    document.getElementById("managerPinInput").focus();
+}
+
+function verifyDiscountPin() {
+    const pin = document.getElementById("managerPinInput").value;
+    if (pin === MANAGER_PIN) {
+        currentDiscount = 0.20; // Set 20% validation rate
+        toggleModal("passModal");
+        updateTotals();
+        triggerAlert("Manager Authorization Verified. 20% Discount Applied.", "success");
+    } else {
+        triggerAlert("Invalid Authorization PIN Entered.", "error");
+    }
+    document.getElementById("managerPinInput").value = "";
+}
+
+// ==========================================================================
+// PROCESSING TRANSACTIONS & SYSTEM OUTPUTS
+// ==========================================================================
 function processTransaction() {
     if (cart.length === 0) {
-        showAlert("error", "Cart contains zero product lines. Transaction rejected.");
+        triggerAlert("Checkout basket is empty.", "warning");
         return;
     }
 
     const payMethod = document.getElementById("payMethod").value;
     const customer = document.getElementById("customerName").value.trim();
-
-    let subtotal = 0;
-    cart.forEach(i => subtotal += (i.price * i.qty));
-    const finalTotal = subtotal * (1 - appliedDiscount);
-    const cashReceived = parseFloat(document.getElementById("cashRendered").value) || 0;
-
-    if (payMethod === "Cash" && cashReceived < finalTotal) {
-        showAlert("error", "Insufficient operational tender presented to satisfy transaction cost parameters.");
-        return;
-    }
+    let subtotal = cart.reduce((acc, x) => acc + (x.price * x.qty), 0);
+    let total = subtotal - (subtotal * currentDiscount);
+    let cash = parseFloat(document.getElementById("cashRendered").value) || 0;
 
     if (payMethod === "Credit Utang" && !customer) {
-        showAlert("error", "Credit profile indexing requires a verifiable Customer Identification register.");
+        triggerAlert("Please specify the account holder name for store credit entries.", "warning");
+        return;
+    }
+    if (payMethod === "Cash" && cash < total) {
+        triggerAlert("Insufficient cash tender received.", "warning");
         return;
     }
 
-    const tx = db.transaction(["products", "sales", "utang"], "readwrite");
-    const prodStore = tx.objectStore("products");
+    const tx = db.transaction(["sales", "products"], "readwrite");
     const salesStore = tx.objectStore("sales");
-    const utangStore = tx.objectStore("utang");
+    const prodStore = tx.objectStore("products");
 
-    cart.forEach(cartItem => {
-        prodStore.get(cartItem.id).onsuccess = (e) => {
-            const p = e.target.result;
-            if(p) {
-                p.stock = Math.max(0, p.stock - cartItem.qty);
-                p.sold = (p.sold || 0) + cartItem.qty;
-                prodStore.put(p);
+    const record = {
+        timestamp: new Date().toISOString(),
+        items: cart.map(x => ({ id: x.id, name: x.name, price: x.price, qty: x.qty })),
+        total: total,
+        method: payMethod,
+        customer: customer || "Walk-In Counter Customer"
+    };
+
+    salesStore.add(record);
+
+    // Deduct warehouse balances line items execution array loops
+    cart.forEach(item => {
+        prodStore.get(item.id).onsuccess = (e) => {
+            let entry = e.target.result;
+            if (entry) {
+                entry.stock = Math.max(0, entry.stock - item.qty);
+                prodStore.put(entry);
             }
         };
     });
 
-    const timestamp = new Date().toISOString();
-    const itemsDescription = cart.map(i => `${i.qty}x ${i.name}`).join(", ");
-    
-    const saleRecord = {
-        timestamp,
-        items: itemsDescription,
-        total: finalTotal,
-        method: payMethod,
-        customer: customer || "Walk-In Customer"
-    };
-
-    salesStore.add(saleRecord);
-
-    if (payMethod === "Credit Utang") {
-        utangStore.add({
-            customer,
-            date: new Date().toLocaleDateString(),
-            items: itemsDescription,
-            amount: finalTotal,
-            status: "UNPAID"
-        });
-    }
-
     tx.oncomplete = () => {
-        executeThermalReceiptPrint(saleRecord, cashReceived);
-        showAlert("success", "Ledger transactions safely stored locally.");
+        generateThermalReceiptPrint(record, cash);
+        sendSaleTelegramReport(record);
+        triggerAlert("Invoice saved successfully. Processing layout print execution loop...", "success");
         cart = [];
-        appliedDiscount = 0;
+        currentDiscount = 0;
         document.getElementById("cashRendered").value = "";
         document.getElementById("customerName").value = "";
-        document.getElementById("customerpassword").value = "";
         renderCart();
         renderProducts();
     };
 }
 
-// --- POS58 THERMAL SILENT PRINT DRIVER ---
-function executeThermalReceiptPrint(record, cashReceived) {
-    const printWindow = document.getElementById("receipt-print");
-    const dateFormatted = new Date(record.timestamp).toLocaleString();
-    const changeVal = Math.max(0, cashReceived - record.total);
-
-    let itemsLines = "";
-    cart.forEach(i => {
-        let itemTotal = (i.price * i.qty).toFixed(2);
-        itemsLines += `${i.name.substring(0, 22).padEnd(22)} \n`;
-        itemsLines += `${i.qty.toString().padStart(3)} x ${i.price.toFixed(2).padStart(7)} = ${itemTotal.padStart(10)}\n`;
-    });
-
-    printWindow.innerHTML = `
---------------------------------
-       MEI CAI FOOD HUB         
-  Caloocan City, Metro Manila   
---------------------------------
-DATE: ${dateFormatted}
-CUST: ${record.customer}
-MTHD: ${record.method}
---------------------------------
-ITEMS:
-${itemsLines}
---------------------------------
-SUBTOTAL: ${document.getElementById("summarySubtotal").innerText.padStart(22)}
-DISCOUNT: ${document.getElementById("discountLabel").innerText.padStart(22)}
-TOTAL AMT: ₱${record.total.toFixed(2).padStart(21)}
-CASH RECV: ₱${cashReceived.toFixed(2).padStart(21)}
-CHANGE:    ₱${changeVal.toFixed(2).padStart(21)}
---------------------------------
-   Thank you for shopping!      
-   POS System Powered v2.0      
---------------------------------
-\n\n\n
+function generateThermalReceiptPrint(record, cash) {
+    const wrapper = document.getElementById("receipt-print");
+    let cleanDate = new Date(record.timestamp).toLocaleString();
+    let lines = `
+    MEI CAI STORE POS SYSTEM
+    Terminal Station Address Log
+    --------------------------------
+    Date: ${cleanDate}
+    Route: ${record.method}
+    Acct: ${record.customer}
+    --------------------------------
+    ITEMS SOLD:
     `;
+    record.items.forEach(x => {
+        lines += `\n${x.name.substring(0,22)}\n ${x.qty} Pcs x ₱${x.price.toFixed(2)} = ₱${(x.qty*x.price).toFixed(2)}`;
+    });
+    lines += `
+    --------------------------------
+    Net Total Payable: ₱${record.total.toFixed(2)}
+    Cash Tendered:     ₱${cash.toFixed(2)}
+    Change Returned:   ₱${Math.max(0, cash - record.total).toFixed(2)}
+    --------------------------------
+    Thank you for shopping!
+    System Record Terminal Log End
+    \n\n\n\n`;
+
+    wrapper.textContent = lines;
     window.print();
-    printWindow.innerHTML = ""; 
 }
 
-// --- SALES METRICS REPORT CHANNELS ---
-function loadSalesHistory() {
-    const filter = document.getElementById("salesFilter").value;
-    const body = document.getElementById("salesBody");
-    body.innerHTML = "";
+// ==========================================================================
+// INTEGRATED GCASH SYSTEM OPERATIONS ENGINE
+// ==========================================================================
+function openGcashModal() {
+    toggleModal("modal-2");
+    loadGcashLedger();
+}
 
-    const store = db.transaction(["sales"], "readonly").objectStore("sales");
-    const matchedRows = [];
+function closeGcashModal() {
+    toggleModal("modal-2");
+}
 
+function toggleGcashType() {
+    const type = document.querySelector('input[name="gcashType"]:checked').value;
+    const inLbl = document.getElementById("gcashInLabel");
+    const outLbl = document.getElementById("gcashOutLabel");
+
+    if (type === "GCASH IN") {
+        inLbl.style.cssText = "flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border:1px solid #3b82f6; background:#eff6ff; color:#1d4ed8; font-weight:600; border-radius:6px; cursor:pointer;";
+        outLbl.style.cssText = "flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border:1px solid var(--border-color); background:#f8fafc; color:var(--text-muted); font-weight:600; border-radius:6px; cursor:pointer;";
+    } else {
+        outLbl.style.cssText = "flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border:1px solid #ef4444; background:#fef2f2; color:#b91c1c; font-weight:600; border-radius:6px; cursor:pointer;";
+        inLbl.style.cssText = "flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border:1px solid var(--border-color); background:#f8fafc; color:var(--text-muted); font-weight:600; border-radius:6px; cursor:pointer;";
+    }
+}
+
+function handleGcashSubmit(e) {
+    e.preventDefault();
+    const type = document.querySelector('input[name="gcashType"]:checked').value;
+    const mobile = document.getElementById("gcashMobile").value.trim();
+    const amount = parseFloat(document.getElementById("gcashAmount").value) || 0;
+    const name = document.getElementById("gcashCustomerName").value.trim();
+    const ref = document.getElementById("gcashRefNo").value.trim();
+
+    // Standard local configuration matrix evaluation variables structures logic lines
+    let commission = 0;
+    if (type === "GCASH IN") {
+        commission = amount <= 1000 ? 10 : Math.ceil(amount * 0.01);
+    } else {
+        commission = amount <= 1000 ? 15 : Math.ceil(amount * 0.015);
+    }
+
+    const tx = db.transaction("gcash", "readwrite");
+    const store = tx.objectStore("gcash");
+    const entry = { timestamp: new Date().toISOString(), type, mobile, amount, name, ref, commission };
+
+    store.add(entry);
+    tx.oncomplete = () => {
+        triggerAlert("GCash transaction logged successfully.", "success");
+        document.getElementById("gcashForm").reset();
+        toggleGcashType();
+        loadGcashLedger();
+    };
+}
+
+function loadGcashLedger() {
+    const tbody = document.getElementById("transactionTableBody");
+    tbody.innerHTML = "";
+
+    let inSum = 0, inComms = 0, inCount = 0;
+    let outSum = 0, outComms = 0, outCount = 0;
+
+    const store = db.transaction("gcash", "readonly").objectStore("gcash");
     store.openCursor().onsuccess = (e) => {
         const cursor = e.target.result;
-        if(cursor) {
-            if(evaluateTimeframe(cursor.value.timestamp, filter)) {
-                matchedRows.push(cursor.value);
+        if (cursor) {
+            const v = cursor.value;
+            let d = new Date(v.timestamp);
+            let match = false;
+
+            if (selectedGcashFilter === "all") match = true;
+            else if (selectedGcashFilter === "daily" && d.toDateString() === new Date().toDateString()) match = true;
+            else if (selectedGcashFilter === "weekly" && (new Date() - d) / (1000 * 60 * 60 * 24) <= 7) match = true;
+
+            if (match) {
+                if (v.type === "GCASH IN") {
+                    inSum += v.amount; inComms += v.commission; inCount++;
+                } else {
+                    outSum += v.amount; outComms += v.commission; outCount++;
+                }
+
+                const tr = document.createElement("tr");
+                tr.style.borderBottom = "1px solid var(--border-color)";
+                tr.innerHTML = `
+                    <td style="padding:10px;">${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</td>
+                    <td style="padding:10px; font-weight:700; color:${v.type==='GCASH IN'?'#1d4ed8':'#b91c1c'}">${v.type}</td>
+                    <td style="padding:10px; font-weight:600;">₱${v.amount.toFixed(2)}</td>
+                    <td style="padding:10px;">${v.mobile}</td>
+                    <td style="padding:10px;">${v.name}</td>
+                    <td style="padding:10px; color:var(--accent); font-weight:700;">₱${v.commission.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
             }
             cursor.continue();
         } else {
-            matchedRows.reverse().forEach(row => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td style="padding:12px; font-size:13px; color:var(--text-muted);">${new Date(row.timestamp).toLocaleString()}</td>
-                    <td style="text-align:left; font-size:13px; max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:12px;"><b>${row.items}</b></td>
-                    <td style="font-weight:700; color:var(--primary); padding:12px;">₱${row.total.toFixed(2)}</td>
-                    <td style="padding:12px;"><small style="background:#f1f5f9; padding:4px 8px; border-radius:4px; font-weight:600;">${row.method}</small></td>
-                `;
-                body.appendChild(tr);
-            });
+            // Update financial summary dashboards analytics cards calculations maps boundaries
+            document.getElementById("inAmountSum").innerText = `₱${inSum.toFixed(2)}`;
+            document.getElementById("inProfitSum").innerText = `₱${inComms.toFixed(2)}`;
+            document.getElementById("outAmountSum").innerText = `₱${outSum.toFixed(2)}`;
+            document.getElementById("outProfitSum").innerText = `₱${outComms.toFixed(2)}`;
+            
+            document.getElementById("totalAmountSum").innerText = `₱${(inSum + outSum).toFixed(2)}`;
+            document.getElementById("totalProfitSum").innerText = `₱${(inComms + outComms).toFixed(2)}`;
+            document.getElementById("emptyState").style.display = (inCount + outCount) === 0 ? "block" : "none";
         }
     };
 }
 
-function evaluateTimeframe(timestamp, filter) {
-    if (filter === "all") return true;
-    const entryDate = new Date(timestamp);
-    const contextDate = new Date();
-    
-    const varianceMilliseconds = contextDate - entryDate;
-    const varianceDays = varianceMilliseconds / (1000 * 60 * 60 * 24);
-
-    if (filter === "daily") return entryDate.toDateString() === contextDate.toDateString();
-    if (filter === "weekly") return varianceDays <= 7;
-    if (filter === "monthly") return varianceDays <= 30;
-    if (filter === "yearly") return varianceDays <= 365;
-    return false;
+function changeGcashFilter(mode, btn) {
+    selectedGcashFilter = mode;
+    document.querySelectorAll(".btn-filter").forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    loadGcashLedger();
 }
 
-// --- DYNAMIC INVENTORY & SEARCH ---
-function searchInventory() {
-    const searchVal = document.getElementById("invSearch").value.toLowerCase();
-    const tbody = document.getElementById("invBody");
-    tbody.innerHTML = "";
+// ==========================================================================
+// DEBT ARREARS CREDIT REGISTER SYSTEM (UTANG MANAGEMENT MODULE)
+// ==========================================================================
+function openUtangModal() {
+    toggleModal("utangModal");
+    const container = document.getElementById("utangListBody");
+    container.innerHTML = "";
 
-    const store = db.transaction(["products"], "readonly").objectStore("products");
+    const store = db.transaction("sales", "readonly").objectStore("sales");
+    let grouped = {};
+
     store.openCursor().onsuccess = (e) => {
         const cursor = e.target.result;
-        if(cursor) {
-            const item = cursor.value;
-            if(item.barcode.toLowerCase().includes(searchVal) || item.name.toLowerCase().includes(searchVal)) {
+        if (cursor) {
+            const v = cursor.value;
+            if (v.method === "Credit Utang") {
+                if (!grouped[v.customer]) grouped[v.customer] = [];
+                grouped[v.customer].push({ id: v.id, total: v.total, timestamp: v.timestamp });
+            }
+            cursor.continue();
+        } else {
+            if (Object.keys(grouped).length === 0) {
+                container.innerHTML = `<p style="text-align:center;color:var(--text-muted);padding:20px;">Zero records of outstanding debt are logged.</p>`;
+                return;
+            }
+            for (let account in grouped) {
+                let sum = grouped[account].reduce((s, x) => s + x.total, 0);
+                const block = document.createElement("div");
+                block.style.cssText = "background:var(--bg-main); padding:14px; border-radius:6px; margin-bottom:12px; border:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;";
+                block.innerHTML = `
+                    <div>
+                        <strong style="font-size:15px; color:var(--text-dark);">${account}</strong>
+                        <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Combined Claims Balances lines: ${grouped[account].length} invoices pending</div>
+                    </div>
+                    <div style="display:flex; gap:14px; align-items:center;">
+                        <span style="font-size:18px; font-weight:800; color:var(--danger)">₱${sum.toFixed(2)}</span>
+                        <button onclick="settleUtangAccount('${account}')" style="background:var(--accent); color:white; border:none; padding:8px 14px; border-radius:4px; font-weight:600; cursor:pointer;">Settle All</button>
+                    </div>
+                `;
+                container.appendChild(block);
+            }
+        }
+    };
+}
+
+function settleUtangAccount(name) {
+    triggerConfirm(`Clear all credit accounts historical debts lines for ${name}?`, () => {
+        const tx = db.transaction("sales", "readwrite");
+        const store = tx.objectStore("sales");
+
+        store.openCursor().onsuccess = (e) => {
+            const cursor = e.target.result;
+            if (cursor) {
+                let entry = cursor.value;
+                if (entry.method === "Credit Utang" && entry.customer === name) {
+                    entry.method = "Cash (Settled Utang)";
+                    store.put(entry);
+                }
+                cursor.continue();
+            } else {
+                triggerAlert(`Account profiles for ${name} have been completely resolved to zero balances.`, "success");
+                openUtangModal();
+            }
+        };
+    });
+}
+
+// ==========================================================================
+// BULK DATA PARSING INGESTION WIZARD SYSTEM LAYER
+// ==========================================================================
+function enableUploadButton() {
+    document.getElementById("uploadBtn").disabled = false;
+}
+
+function processBulkUpload() {
+    const fileInput = document.getElementById("bulkFileInput");
+    if (!fileInput.files.length) return;
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    document.getElementById("uploadStatus").style.display = "block";
+    
+    reader.onload = function(e) {
+        const lines = e.target.result.split("\n");
+        const tx = db.transaction("products", "readwrite");
+        const store = tx.objectStore("products");
+        let count = 0;
+
+        lines.forEach(row => {
+            const cols = row.split(",");
+            if (cols.length >= 4 && cols[0].trim() !== "BARCODE") {
+                const item = {
+                    barcode: cols[0].trim(),
+                    name: cols[1].trim(),
+                    price: parseFloat(cols[2]) || 0,
+                    stock: parseInt(cols[3]) || 0
+                };
+                store.put(item);
+                count++;
+            }
+        });
+
+        tx.oncomplete = () => {
+            document.getElementById("processCount").innerText = count;
+            setTimeout(() => {
+                document.getElementById("uploadStatus").style.display = "none";
+                toggleModal("bulkUploadModal");
+                renderProducts();
+                triggerAlert(`Batch import processing verified. written ${count} item rows lines.`, "success");
+            }, 1000);
+        };
+    };
+    reader.readAsText(file);
+}
+
+// ==========================================================================
+// DYNAMIC VIEW EXTENSION ANALYTICS DASHBOARDS POPUPS
+// ==========================================================================
+function loadSalesHistory() {
+    const filter = document.getElementById("salesFilter").value;
+    const tbody = document.getElementById("salesBody");
+    tbody.innerHTML = "";
+
+    const store = db.transaction("sales", "readonly").objectStore("sales");
+    store.openCursor(null, "prev").onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+            const v = cursor.value;
+            let d = new Date(v.timestamp);
+            let match = false;
+
+            if (filter === "all") match = true;
+            else if (filter === "daily" && d.toDateString() === new Date().toDateString()) match = true;
+            
+            if (match) {
+                let itemsList = v.items.map(x => `${x.name} (${x.qty} Pcs)`).join(", ");
                 const tr = document.createElement("tr");
                 tr.style.borderBottom = "1px solid var(--border-color)";
                 tr.innerHTML = `
-                    <td style="padding:12px; color:var(--text-muted); font-size:13px;">${item.barcode}</td>
-                    <td style="text-align:left; padding:12px;"><b>${item.name}</b></td>
-                    <td style="padding:12px; font-weight:600;">₱${item.price.toFixed(2)}</td>
-                    <td style="color:${item.stock < 10 ? 'var(--danger)':'var(--text-dark)'}; font-weight:700; padding:12px;">${item.stock}</td>
-                    <td style="padding:12px; color:var(--text-muted);">${item.sold || 0}</td>
+                    <td style="padding:12px; font-size:13px;">${d.toLocaleString()}</td>
+                    <td style="padding:12px; font-size:13px; max-width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${itemsList}</td>
+                    <td style="padding:12px; font-weight:600;">₱${v.total.toFixed(2)}</td>
+                    <td style="padding:12px;"><span style="background:#f1f5f9; padding:4px 8px; border-radius:4px; font-size:12px;">${v.method}</span></td>
                 `;
                 tbody.appendChild(tr);
             }
@@ -1513,367 +1342,176 @@ function searchInventory() {
     };
 }
 
-function loadLowStockReport() {
-    const body = document.getElementById("lowStockBody");
-    body.innerHTML = "";
-    const store = db.transaction(["products"], "readonly").objectStore("products");
+function searchInventory() {
+    const query = document.getElementById("invSearch").value.toLowerCase();
+    const tbody = document.getElementById("invBody");
+    tbody.innerHTML = "";
+
+    const store = db.transaction("products", "readonly").objectStore("products");
     store.openCursor().onsuccess = (e) => {
         const cursor = e.target.result;
-        if(cursor) {
-            const item = cursor.value;
-            if(item.stock < 10) {
+        if (cursor) {
+            const v = cursor.value;
+            if (v.name.toLowerCase().includes(query) || v.barcode.includes(query)) {
                 const tr = document.createElement("tr");
+                tr.style.borderBottom = "1px solid var(--border-color)";
                 tr.innerHTML = `
-                    <td style="padding:12px; color:var(--text-muted);">${item.barcode}</td>
-                    <td style="text-align:left; padding:12px;"><b>${item.name}</b></td>
-                    <td style="padding:12px;">₱${item.price.toFixed(2)}</td>
-                    <td style="color:var(--danger); font-weight:700; padding:12px;">${item.stock}</td>
-                    <td style="padding:12px;">${item.sold || 0}</td>
+                    <td style="padding:12px;">${v.barcode}</td>
+                    <td style="padding:12px; font-weight:600;">${v.name}</td>
+                    <td style="padding:12px;">₱${v.price.toFixed(2)}</td>
+                    <td style="padding:12px; font-weight:700; color:${v.stock<=5?'var(--danger)':'inherit'}">${v.stock} Units</td>
+                    <td style="padding:12px;"><button onclick="deleteProductRecord(${v.id})" style="color:var(--danger); background:transparent; border:none; cursor:pointer;"><i class="fa-solid fa-trash-can"></i></button></td>
                 `;
-                body.appendChild(tr);
+                tbody.appendChild(tr);
             }
             cursor.continue();
         }
     };
 }
 
-function renderTopProducts() {
-    const container = document.getElementById("topProductsList");
-    container.innerHTML = "<p style='padding:16px; color:var(--text-muted);'>Computing analytics trends insights...</p>";
-
-    const store = db.transaction(["products"], "readonly").objectStore("products");
-    const arr = [];
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            arr.push(cursor.value);
-            cursor.continue();
-        } else {
-            arr.sort((x, y) => (y.sold || 0) - (x.sold || 0));
-            container.innerHTML = "";
-            arr.slice(0, 5).forEach((item, idx) => {
-                const div = document.createElement("div");
-                div.style = "padding:14px 16px; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;";
-                div.innerHTML = `
-                    <span><b style="color:var(--text-muted); margin-right:8px;">#${idx+1}</b> <span style="font-weight:600;">${item.name}</span></span> 
-                    <span style="background:#e6f4ea; color:#137333; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600;">${item.sold || 0} sold</span>
-                `;
-                container.appendChild(div);
-            });
-        }
-    };
-}
-
-// --- GCASH LEDGER BOOKKEEPING MODAL SYSTEM ---
-function openGcashModal() {
-    document.getElementById("modal-2").style.display = "flex";
-}
-function closeGcashModal() {
-    document.getElementById("modal-2").style.display = "none";
-}
-
-function toggleGcashType() {
-    const activeType = document.querySelector('input[name="gcashType"]:checked').value;
-    const inLabel = document.getElementById("gcashInLabel");
-    const outLabel = document.getElementById("gcashOutLabel");
-
-    if(activeType === "GCASH IN") {
-        inLabel.style.background = "#eff6ff"; inLabel.style.borderColor = "#3b82f6"; inLabel.style.color = "#1d4ed8";
-        outLabel.style.background = "#f8fafc"; outLabel.style.borderColor = "var(--border-color)"; outLabel.style.color = "var(--text-muted)";
-    } else {
-        outLabel.style.background = "#fef2f2"; outLabel.style.borderColor = "#f87171"; outLabel.style.color = "#b91c1c";
-        inLabel.style.background = "#f8fafc"; inLabel.style.borderColor = "var(--border-color)"; inLabel.style.color = "var(--text-muted)";
-    }
-}
-
-function handleGcashSubmit(event) {
-    event.preventDefault();
-    const type = document.querySelector('input[name="gcashType"]:checked').value;
-    const mobile = document.getElementById("gcashMobile").value;
-    const amount = parseFloat(document.getElementById("gcashAmount").value) || 0;
-    const customer = document.getElementById("gcashCustomerName").value;
-    const ref = document.getElementById("gcashRefNo").value;
-    const profit = amount * 0.02; 
-
-    const logRecord = { timestamp: new Date().toISOString(), type, mobile, amount, customer, ref, profit };
-    const tx = db.transaction(["gcash"], "readwrite");
-    tx.objectStore("gcash").add(logRecord);
-    
-    tx.oncomplete = () => {
-        closeGcashModal();
-        document.getElementById("gcashForm").reset();
-        toggleGcashType();
-        fetchGcashLedger();
-        showAlert("success", "GCash transaction log saved.");
-    };
-}
-
-function changeFilter(val, element) {
-    document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
-    element.classList.add('active');
-    currentGcashFilter = val;
-    fetchGcashLedger();
-}
-
-function fetchGcashLedger() {
-    const body = document.getElementById("transactionTableBody");
-    body.innerHTML = "";
-
-    let inCount = 0, inAmt = 0, inProf = 0;
-    let outCount = 0, outAmt = 0, outProf = 0;
-
-    const store = db.transaction(["gcash"], "readonly").objectStore("gcash");
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            const item = cursor.value;
-            if(evaluateTimeframe(item.timestamp, currentGcashFilter)) {
-                if(item.type === "GCASH IN") {
-                    inCount++; inAmt += item.amount; inProf += item.profit;
-                } else {
-                    outCount++; outAmt += item.amount; outProf += item.profit;
-                }
-
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td class="col-datetime" style="color:var(--text-muted);">${new Date(item.timestamp).toLocaleString()}</td>
-                    <td class="col-type"><span style="color:${item.type==='GCASH IN'?'#3b82f6':'#ef4444'}; font-weight:700;">${item.type}</span></td>
-                    <td class="col-amount" style="font-weight:600;">₱${item.amount.toFixed(2)}</td>
-                    <td class="col-mobile" style="font-family:monospace;">${item.mobile}</td>
-                    <td class="col-ref"><b>${item.customer}</b> <br><small style="color:var(--text-muted)">${item.ref}</small></td>
-                    <td class="col-profit" style="color:var(--accent); font-weight:600;">₱${item.profit.toFixed(2)}</td>
-                `;
-                body.appendChild(tr);
-            }
-            cursor.continue();
-        } else {
-            document.getElementById("emptyState").style.display = (body.children.length === 0) ? "block" : "none";
-            
-            document.getElementById("inTxCount").innerText = `Count: ${inCount}`;
-            document.getElementById("inAmountSum").innerText = `₱${inAmt.toFixed(2)}`;
-            document.getElementById("inProfitSum").innerText = `₱${inProf.toFixed(2)}`;
-
-            document.getElementById("outTxCount").innerText = `Count: ${outCount}`;
-            document.getElementById("outAmountSum").innerText = `₱${outAmt.toFixed(2)}`;
-            document.getElementById("outProfitSum").innerText = `₱${outProf.toFixed(2)}`;
-
-            document.getElementById("totalTxCount").innerText = `Total: ${inCount + outCount}`;
-            document.getElementById("totalAmountSum").innerText = `₱${(inAmt + outAmt).toFixed(2)}`;
-            document.getElementById("totalProfitSum").innerText = `₱${(inProf + outProf).toFixed(2)}`;
-        }
-    };
-}
-
-// --- DEBTOR MODULE (CREDIT UTANG MANAGEMENT) ---
-function openUtangModal() {
-    const modal = document.getElementById("utangModal");
-    modal.style.display = "flex";
-    const body = document.getElementById("utangListBody");
-    body.innerHTML = "<p>Reading active accounts profiles...</p>";
-
-    const store = db.transaction(["utang"], "readonly").objectStore("utang");
-    const elementsArray = [];
-
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            elementsArray.push(cursor.value);
-            cursor.continue();
-        } else {
-            body.innerHTML = "";
-            if(elementsArray.length === 0) {
-                body.innerHTML = "<p style='text-align:center; padding:20px; color:var(--text-muted);'>No active outstanding credit lines detected.</p>";
-                return;
-            }
-            elementsArray.forEach(record => {
-                const itemDiv = document.createElement("div");
-                itemDiv.style = "background:#fff; padding:16px; margin-bottom:12px; border:1px solid var(--border-color); border-left:4px solid var(--warning); border-radius:8px; display:flex; justify-content:space-between; align-items:center;";
-                itemDiv.innerHTML = `
-                    <div>
-                        <strong style="font-size:15px; color:var(--primary);">CUSTOMER: ${record.customer}</strong> <small style="color:var(--text-muted); margin-left:12px;">${record.date}</small><br>
-                        <small style="color:var(--text-muted); display:block; margin:4px 0;">Items: ${record.items}</small>
-                        <span style="font-weight:700; color:var(--danger); font-size:14px;">BALANCE DUE: ₱${record.amount.toFixed(2)}</span>
-                    </div>
-                    <button onclick="settleDebt(${record.id})" style="background:var(--accent); color:white; border:none; padding:10px 16px; font-weight:600; font-size:13px; border-radius:6px; cursor:pointer; transition:var(--transition);">SETTLE PAID</button>
-                `;
-                body.appendChild(itemDiv);
-            });
-        }
-    };
-}
-
-function closeUtangModal() {
-    document.getElementById("utangModal").style.display = "none";
-}
-
-function settleDebt(id) {
-    showConfirm("Commit complete account transaction balance settle profile parameters?", () => {
-        const tx = db.transaction(["utang"], "readwrite");
-        tx.objectStore("utang").delete(id);
+function deleteProductRecord(id) {
+    triggerConfirm("Delete this product template row from data systems arrays permanently?", () => {
+        const tx = db.transaction("products", "readwrite");
+        tx.objectStore("products").delete(id);
         tx.oncomplete = () => {
-            showAlert("success", "Credit balance parameter cleared successfully.");
-            openUtangModal();
-        };
-    });
-}
-
-// --- DATA EXPORT MATRIX ENGINE (CSV CREATORS) ---
-function exportToCSV() {
-    const store = db.transaction(["sales"], "readonly").objectStore("sales");
-    let csvContent = "data:text/csv;charset=utf-8,DATE,ITEMS DESCRIPTION,TOTAL TRANSACTION AMOUNT,METHODOLOGY,CUSTOMER\n";
-
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            const r = cursor.value;
-            csvContent += `"${new Date(r.timestamp).toLocaleString()}","${r.items.replace(/"/g, '""')}",${r.total},"${r.method}","${r.customer}"\n`;
-            cursor.continue();
-        } else {
-            triggerFileDownload(csvContent, "SalesReport.csv");
-        }
-    };
-}
-
-function exportAllStockToCSV() {
-    const store = db.transaction(["products"], "readonly").objectStore("products");
-    let csvContent = "data:text/csv;charset=utf-8,BARCODE,ITEM NAME,UNIT PRICE,STOCK QTY,UNITS SOLD\n";
-
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            const i = cursor.value;
-            csvContent += `"${i.barcode}","${i.name.replace(/"/g, '""')}",${i.price},${i.stock},${i.sold || 0}\n`;
-            cursor.continue();
-        } else {
-            triggerFileDownload(csvContent, "InventoryStockReport.csv");
-        }
-    };
-}
-
-function exportLowStockToCSV() {
-    const store = db.transaction(["products"], "readonly").objectStore("products");
-    let csvContent = "data:text/csv;charset=utf-8,BARCODE,ITEM NAME,UNIT PRICE,STOCK QUANTITY REMAINING\n";
-
-    store.openCursor().onsuccess = (e) => {
-        const cursor = e.target.result;
-        if(cursor) {
-            const i = cursor.value;
-            if(i.stock < 10) {
-                csvContent += `"${i.barcode}","${i.name.replace(/"/g, '""')}",${i.price},${i.stock}\n`;
-            }
-            cursor.continue();
-        } else {
-            triggerFileDownload(csvContent, "RestockUrgentList.csv");
-        }
-    };
-}
-
-function triggerFileDownload(csvContent, filename) {
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", filename);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-// --- DATA IMPORT MODULE (CSV BULK UPLOADER) ---
-function processBulkUpload() {
-    const fileInput = document.getElementById("bulkFileInput");
-    const status = document.getElementById("uploadStatus");
-    const countSpan = document.getElementById("processCount");
-
-    if(fileInput.files.length === 0) return;
-    
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    
-    status.style.display = "block";
-    
-    reader.onload = function(e) {
-        const text = e.target.result;
-        const lines = text.split("\n");
-        
-        const tx = db.transaction(["products"], "readwrite");
-        const store = tx.objectStore("products");
-        
-        let counter = 0;
-        
-        lines.forEach(line => {
-            if(!line.trim()) return;
-            const parts = line.split(",");
-            if(parts.length >= 4) {
-                const barcode = parts[0].trim();
-                const name = parts[1].trim();
-                const price = parseFloat(parts[2]) || 0;
-                const stock = parseInt(parts[3]) || 0;
-                
-                store.put({ barcode, name, price, stock, sold: 0 });
-                counter++;
-                countSpan.innerText = counter;
-            }
-        });
-        
-        tx.oncomplete = () => {
-            showAlert("success", `Bulk upload sequence complete. ${counter} profiles added.`);
-            toggleModal('bulkUploadModal');
+            searchInventory();
             renderProducts();
-            document.getElementById("bulkFileInput").value = "";
-            document.getElementById("uploadBtn").disabled = true;
-            status.style.display = "none";
+            triggerAlert("Row removed from active registry lines.", "success");
         };
-    };
-    reader.readAsText(file);
-}
-
-// --- UI DIALOG MODAL LAYOUTS ---
-function showAlert(type, message) {
-    const modal = document.getElementById("alertModal");
-    const icon = document.getElementById("alertIcon");
-    const msg = document.getElementById("alertMsg");
-    const box = document.getElementById("alert-box");
-
-    box.style.borderTop = type === "success" ? "6px solid var(--accent)" : "6px solid var(--danger)";
-    icon.innerHTML = type === "success" ? "<i class='fas fa-check-circle' style='color:var(--accent);'></i>" : "<i class='fas fa-times-circle' style='color:var(--danger);'></i>";
-    msg.innerText = message;
-    modal.style.display = "flex";
-}
-
-function closeAlert() {
-    document.getElementById("alertModal").style.display = "none";
-}
-
-function showConfirm(message, callback) {
-    const modal = document.getElementById("confirmModal");
-    document.getElementById("confirmMsg").innerText = message;
-    modal.style.display = "flex";
-    
-    document.getElementById("confirmYes").onclick = () => {
-        modal.style.display = "none";
-        callback();
-    };
-}
-
-function closeConfirm() {
-    document.getElementById("confirmModal").style.display = "none";
-}
-
-// --- TELEGRAM FLOATING CUSTOMER CHAT SYSTEM ---
-function toggleTGChat() {
-    const box = document.getElementById("tg-chat-box");
-    box.classList.toggle("tg-hidden");
-}
-
-// --- TERMINAL LOGOUT EXPORT BACKUP WORKFLOW ---
-function sendExportAndExit() {
-    showConfirm("Are you certain you want to sync records files data backups and sign off?", () => {
-        exportToCSV(); 
-        setTimeout(() => {
-            window.location.reload(); 
-        }, 1500);
     });
 }
-	</script> 
-	</body>
+
+// ==========================================================================
+// EXPORTS DATA ENGINES MODULE DUMP TO CSV CAPABILITIES
+// ==========================================================================
+function exportToCSV() {
+    const store = db.transaction("sales", "readonly").objectStore("sales");
+    let rows = [["Timestamp", "Customer", "Payment Method", "Total Charged Value"]];
+
+    store.openCursor().onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+            let v = cursor.value;
+            rows.push([v.timestamp, v.customer, v.method, v.total]);
+            cursor.continue();
+        } else {
+            let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+            let link = document.createElement("a");
+            link.setAttribute("href", encodeURI(csvContent));
+            link.setAttribute("download", `Sales_Dump_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+}
+
+// ==========================================================================
+// CLOUD SYSTEM AUTOMATION REPORT ROUTINES GATEWAYS (TELEGRAM BOT API)
+// ==========================================================================
+function toggleTGChat() {
+    document.getElementById("tg-chat-box").classList.toggle("tg-hidden");
+}
+
+function sendSaleTelegramReport(sale) {
+    let msg = `🛒 *NEW INVOICE TRANSACTION CLOSED*\n`;
+    msg += `Method: ${sale.method}\n`;
+    msg += `Customer: ${sale.customer}\n`;
+    msg += `--------------------------------\n`;
+    sale.items.forEach(i => {
+        msg += `• ${i.name} x${i.qty} \n`;
+    });
+    msg += `--------------------------------\n`;
+    msg += `*Net Collected Balance Summary Yield: ₱${sale.total.toFixed(2)}*`;
+
+    dispatchTelegramAPI(msg);
+}
+
+function sendTelegramMessageDirect() {
+    const field = document.getElementById("tg-input-field");
+    const val = field.value.trim();
+    if (!val) return;
+    dispatchTelegramAPI(`💬 *MANUAL TERMINAL MESSAGE EXECUTIVE LOG:*\n${val}`);
+    field.value = "";
+}
+
+function dispatchTelegramAPI(textStr) {
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const payload = { chat_id: TELEGRAM_CHAT_ID, text: textStr, parse_mode: "Markdown" };
+
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        const box = document.getElementById("tg-messages-box");
+        const p = document.createElement("p");
+        p.style.cssText = "margin:4px 0; font-size:12px; background:#e0f2fe; padding:6px; border-radius:4px;";
+        p.innerText = `Report line sent successfully broadcast pipeline.`;
+        box.appendChild(p);
+    }).catch(err => console.error("Telegram endpoint disconnect runtime failures context", err));
+}
+
+function sendExportAndExit() {
+    triggerConfirm("Close batch logging terminal and shut operations channels down?", () => {
+        dispatchTelegramAPI(`⚠️ *TERMINAL LOG OFF NOTICE INITIALIZED*\nBatch operations cycle signed off at current timestamp interval.`);
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    });
+}
+
+// ==========================================================================
+// MODAL & CENTRALIZED UI NOTIFICATION UTILS
+// ==========================================================================
+function toggleModal(id) {
+    const el = document.getElementById(id);
+    const shown = el.style.display === "flex";
+    el.style.display = shown ? "none" : "flex";
+
+    if (!shown && id === 'salesModal') loadSalesHistory();
+    if (!shown && id === 'inventoryModal') searchInventory();
+    if (!shown && id === 'lowStockModal') populateLowStockReport();
+}
+
+function populateLowStockReport() {
+    const tbody = document.getElementById("lowStockBody");
+    tbody.innerHTML = "";
+    const store = db.transaction("products", "readonly").objectStore("products");
+    store.openCursor().onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+            const v = cursor.value;
+            if (v.stock <= 5) {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `<td style="padding:12px;">${v.barcode}</td><td style="padding:12px;">${v.name}</td><td style="padding:12px;font-weight:700;color:var(--danger);">${v.stock} Left</td>`;
+                tbody.appendChild(tr);
+            }
+            cursor.continue();
+        }
+    };
+}
+
+function triggerAlert(msg, type) {
+    const icon = document.getElementById("alertIcon");
+    if (type === "success") { icon.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--accent);"></i>`; }
+    else if (type === "error") { icon.innerHTML = `<i class="fa-solid fa-circle-xmark" style="color:var(--danger);"></i>`; }
+    else { icon.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--warning);"></i>`; }
+    
+    document.getElementById("alertMsg").innerText = msg;
+    document.getElementById("alertModal").style.display = "flex";
+}
+
+function closeAlert() { document.getElementById("alertModal").style.display = "none"; }
+
+function triggerConfirm(msg, action) {
+    document.getElementById("confirmMsg").innerText = msg;
+    const btn = document.getElementById("confirmYes");
+    btn.onclick = () => { action(); closeConfirm(); };
+    document.getElementById("confirmModal").style.display = "flex";
+}
+
+function closeConfirm() { document.getElementById("confirmModal").style.display = "none"; }
+	</script>
+</body>
 </html>
