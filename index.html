@@ -84,9 +84,9 @@ body {
 .app-container {
     display: grid;
     grid-template-columns: 1.1fr 1.4fr 1.1fr;
-    gap: 16px;
+    gap: 10px;
     height: calc(100vh - 50px);
-    padding: 16px;
+    padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -320,21 +320,120 @@ body {
         </div>
     </div>
 
-    <header class="dashboard-header">
-        <div id="fullscreen-btn" style="font-weight: 700; color: var(--text-dark); cursor: pointer;">
-            <i class="fa-solid fa-cash-register" style="color: var(--primary);"></i> MEI CAI STORE <small style="font-weight: 400; opacity: 0.7;">v2.0</small>
-        </div>
-        <div class="header-actions">
-            <button class="nav-btn" onclick="toggleModal('salesModal')"><i class="fa-solid fa-chart-line"></i> Sales Report</button>
-            <button class="nav-btn" onclick="toggleModal('inventoryModal')"><i class="fa-solid fa-boxes-stacked"></i>Current Stocks</button>
-            <button class="nav-btn" onclick="toggleModal('lowStockModal')"><i class="fa-solid fa-triangle-exclamation"></i> Low Stock</button>
-            <button class="nav-btn" onclick="toggleModal('topProductsModal')"><i class="fa-solid fa-fire"></i> Best Sellers</button>
-            <button class="nav-btn" onclick="openGcashModal()"><i class="fa-solid fa-wallet"></i> GCash IN/OUT</button>
-            <button class="nav-btn" onclick="openUtangModal()"><i class="fa-solid fa-book-open"></i> Credit Log</button>
-            <button class="nav-btn" onclick="toggleModal('bulkUploadModal')"><i class="fa-solid fa-file-import"></i> Bulk Upload</button>
-            <button class="nav-btn btn-logout" onclick="sendExportAndExit()"><i class="fa-solid fa-power-off"></i> Sign Off</button>
-        </div>
-    </header>
+    <header class="dashboard-header floating-dashboard">
+    <div id="fullscreen-btn" class="dashboard-logo">
+        <i class="fa-solid fa-cash-register" style="color: var(--primary);"></i> MEI CAI STORE <small style="font-weight: 400; opacity: 0.7;">v2.0</small>
+    </div>
+    <div class="header-actions">
+        <button class="nav-btn" onclick="toggleModal('salesModal')"><i class="fa-solid fa-chart-line"></i> Sales Report</button>
+        <button class="nav-btn" onclick="toggleModal('inventoryModal')"><i class="fa-solid fa-boxes-stacked"></i> Current Stocks</button>
+        <button class="nav-btn" onclick="toggleModal('lowStockModal')"><i class="fa-solid fa-triangle-exclamation"></i> Low Stock</button>
+        <button class="nav-btn" onclick="toggleModal('topProductsModal')"><i class="fa-solid fa-fire"></i> Best Sellers</button>
+        <button class="nav-btn" onclick="openGcashModal()"><i class="fa-solid fa-wallet"></i> GCash IN/OUT</button>
+        <button class="nav-btn" onclick="openUtangModal()"><i class="fa-solid fa-book-open"></i> Credit Log</button>
+        <button class="nav-btn" onclick="toggleModal('bulkUploadModal')"><i class="fa-solid fa-file-import"></i> Bulk Upload</button>
+        <button class="nav-btn btn-logout" onclick="sendExportAndExit()"><i class="fa-solid fa-power-off"></i> Sign Off</button>
+    </div>
+</header>
+
+<style>
+    /* Base configuration for the body to prevent content from hiding behind the floating header */
+    body {
+        margin: 0;
+        padding-top: 60px; /* Adjust this value based on your header's actual height */
+        background-color: #f4f6f9; /* Example background */
+        font-family: sans-serif;
+    }
+
+    /* The Floating Dashboard Container */
+    .floating-dashboard {
+        position: fixed;
+        top: 0px; /* Gives it that "floating" gap from the very top */
+        left: 50%;
+        transform: translateX(-50%); /* Centers the dashboard perfectly */
+        width: 100%; /* Responsive width */
+        max-width: 1400px; /* Limits maximum expansion on ultra-wide screens */
+			height: 60px;
+			background:red;
+        
+        /* Layout */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+		background-color:red;
+        box-sizing: border-box;
+        z-index: 1000; /* Keeps it on top of all other elements */
+
+        /* Styling & Glassmorphism Effect */
+        background: rgba(255, 255, 255, 0.99); /* Semi-transparent white */
+        backdrop-filter: blur(10px); /* Blurs the content behind it */
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+       background: linear-gradient(0deg,rgba(255, 255, 255, 1) 0%, rgba(209, 209, 209, 1) 100%);
+        
+        /* Premium Shadow Depth */
+
+    }
+    /* Logo Style */
+    .dashboard-logo {
+        font-weight: 700; 
+        color: var(--text-dark, #333); 
+        cursor: pointer;
+        font-size: 1.1rem;
+        white-space: nowrap;
+    }
+
+    /* Actions Wrapper */
+    .header-actions {
+        display: flex;
+        gap: 5px; /* Spacing between buttons */
+        align-items: center;
+        overflow-x: auto; /* Allows scrolling on smaller screens so layout doesn't break */
+        scrollbar-width: none; /* Hide scrollbar for Chrome/Safari/Firefox */
+    }
+    .header-actions::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Button Styling Framework (Adjust variables as needed) */
+    .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text-dark, #4a5568);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .nav-btn i {
+        font-size: 1rem;
+    }
+
+    /* Button Hover States */
+    .nav-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--primary, #007bff);
+        transform: translateY(-1px);
+    }
+
+    /* Special Styling for Sign Off */
+    .btn-logout {
+        color: #e53e3e;
+        background: rgba(229, 62, 62, 0.1);
+    }
+    .btn-logout:hover {
+        background: #e53e3e;
+        color: #fff !important;
+    }
+</style>
 
     <main class="app-container" style="display: flex; flex-direction: row;">
         
