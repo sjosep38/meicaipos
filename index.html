@@ -437,6 +437,128 @@ body {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* ==========================================================================
+   GLOBAL APP RESPONSIVE LAYOUT CONTEXT
+   ========================================================================== */
+
+/* Base Container using Grid/Flex */
+.app-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1.5fr 1.1fr; /* Custom split ratios for desktop PC */
+    gap: 16px;
+    height: calc(100vh - 60px); /* Subtracts header bar height */
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: var(--bg-main, #f8fafc);
+    overflow: hidden;
+}
+
+/* Individual Panel Structural Base */
+.column {
+    background: #ffffff;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Helper Scroll Classes inside Panels */
+.scroll-list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* ==========================================================================
+   MEDIA QUERY: TABLET LANDSCAPE & PORTRAIT (Max-Width: 1024px)
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr 1fr; /* Shifts layout to a balanced 2-column grid */
+        height: auto;
+        overflow-y: auto;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    /* Shift checkout panel to span across the bottom full-width */
+    .checkout-panel {
+        grid-column: span 2;
+        height: auto;
+    }
+    
+    .products-panel, .cart-panel {
+        height: 65vh; /* Sets a comfortable scrolling height for tablet views */
+    }
+}
+
+/* ==========================================================================
+   MEDIA QUERY: SMARTPHONES / MOBILE TERMINALS (Max-Width: 640px)
+   ========================================================================== */
+@media screen and (max-width: 640px) {
+    /* Adjust Header Navigation for Mobile */
+    .dashboard-header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        width: 100%;
+    }
+    
+    .nav-btn {
+        flex: 1 1 calc(50% - 6px); /* Buttons split into 2 rows cleanly on mobile mobile */
+        font-size: 12px;
+        padding: 8px;
+        justify-content: center;
+    }
+
+    /* Collapse the Main Workspace Container into a Single Column Flow */
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        overflow-y: visible;
+        gap: 16px;
+        padding: 8px;
+    }
+
+    /* Give individual screens realistic standalone operational focus heights */
+    .products-panel {
+        order: 2; /* Moves inventory below the active cart order screen */
+        height: 50vh;
+    }
+
+    .cart-panel {
+        order: 1; /* Keeps active continuous scanner basket on top */
+        height: 55vh;
+    }
+
+    .checkout-panel {
+        order: 3; /* Payment processing finishes up at the baseline fold */
+        height: auto;
+        overflow: visible;
+    }
+
+    /* Re-collapse side-by-side inputs on extremely tight screens */
+    .checkout-panel div[style*="display: flex"] {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+    
+    .checkout-panel div[style*="flex-direction: row"] {
+        flex-direction: row !important; /* Forces the lower metrics block to remain horizontal */
+    }
+}
 	</style>
 	
 <body>
