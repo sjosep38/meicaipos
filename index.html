@@ -179,6 +179,7 @@ body {
     align-items: center;
     padding: 10px 8px;
     border-bottom: 1px solid #f1f5f9;
+	
 }
 .product-item:hover { background: #f8fafc; cursor: pointer; }
 
@@ -1163,9 +1164,7 @@ function loadGcashLedger() {
                 tr.style.borderBottom = "1px solid var(--border-color)";
                 tr.innerHTML = `
                     
-					<td style="padding: 5px;">
-    ${new Date(d).toLocaleDateString()} ${new Date(d).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}
-</td>
+					<td style="padding: 5px;">${new Date(d).toLocaleDateString()} ${new Date(d).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</td>
                     <td style="padding:5px; font-weight:700; color:${v.type==='GCASH IN'?'#1d4ed8':'#b91c1c'}">${v.type}</td>
                     <td style="padding:5px; font-weight:600;">₱${v.amount.toFixed(2)}</td>
                     <td style="padding:5px;">${v.mobile}</td>
