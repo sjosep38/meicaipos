@@ -85,7 +85,7 @@ body {
     display: grid;
     grid-template-columns: 1.1fr 1.4fr 1.1fr;
     gap: 16px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 90px);
     padding: 16px;
     box-sizing: border-box;
     overflow: hidden;
@@ -315,7 +315,7 @@ body {
             <div class="error-msg" id="login-error" style="display: none; color: var(--danger); margin-bottom: 12px; font-size: 13px;">
                 <i class="fa-solid fa-circle-exclamation"></i> Incorrect Terminal Password
             </div>
-            <input type="password" id="password-input" placeholder="Enter Terminal Password" autocomplete="off" style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <input type="password" id="password-input" placeholder="Enter Terminal Password"value="2026" autocomplete="off" style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
             <button id="login-btn" onclick="checkLogin()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Unlock Terminal</button>
         </div>
     </div>
