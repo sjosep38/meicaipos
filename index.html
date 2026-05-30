@@ -317,7 +317,7 @@ body {
             <button id="login-btn" onclick="checkLogin()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Unlock Terminal</button>
         </div>
     </div>
-
+	<div id="content-area">
     <header class="dashboard-header">
         <div id="fullscreen-btn" style="font-weight: 700; color: var(--text-dark); cursor: pointer;">
             <i class="fa-solid fa-cash-register" style="color: var(--primary);"></i> MEI CAI STORE <small style="font-weight: 400; opacity: 0.7;">v2.0</small>
@@ -1633,6 +1633,22 @@ document.addEventListener("click", (e) => {
     if (laserInput) {
         laserInput.focus();
     }
+});
+const btn = document.getElementById('fullscreen-btn');
+const content = document.getElementById('content-area');
+
+btn.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    // If no element is in fullscreen, request it
+    content.requestFullscreen().catch(err => {
+      alert(`Error attempting to enable full-screen mode: ${err.message}`);
+    });
+   
+  } else {
+    // If we are already in fullscreen, exit
+    document.exitFullscreen();
+    
+  }
 });
 
 	</script>
