@@ -390,16 +390,24 @@ body {
             <button class="btn-void" style="margin-top: 10px; width: 100%;" onclick="voidCart()">
                 <i class="fa-solid fa-trash-can"></i> Flush and Void Cart
             </button>
+			                <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                    <span style="color: var(--text-muted);">Basket Combined Items Count:</span>
+                    <span id="summaryQty" style="font-weight: 600;">0</span>
+                </div>
         </section>
 
         <section class="column checkout-panel" style="display: flex; flex-direction: column; min-height: 100%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
             <h3 style="margin-top: 0; margin-bottom: 10px; flex-shrink: 0; font-size: 13px;">Payment Tender Processing</h3>
-            
-            <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
-                <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                    <span style="color: var(--text-muted);">Basket Combined Items Count:</span>
-                    <span id="summaryQty" style="font-weight: 600;">0</span>
+           <div>
+                    <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Payment Option</label>
+                    <select id="payMethod" onchange="handlePayMethodChange()" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px;">
+                        <option value="Cash">Cash </option>
+                        <option value="GCash">GCash</option>
+                        <option value="Credit Utang">Credit Utang </option>
+                    </select>
                 </div>
+            <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
+
                 <div style="display: flex; justify-content: space-between; font-size: 13px;">
                     <span style="color: var(--text-muted);">Gross Order Subtotal:</span>
                     <span style="font-weight: 600;">₱<span id="summarySubtotal">0.00</span></span>
@@ -413,22 +421,15 @@ body {
                     <i class="fa-solid fa-percent"></i> Apply Senior/Manager 20% Privilege Discount
                 </button>-->
             </div>
-
+			
             <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0; flex-shrink: 0;">
 
             <div style="display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;">
-                <div>
-                    <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Funding Route Channel</label>
-                    <select id="payMethod" onchange="handlePayMethodChange()" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px;">
-                        <option value="Cash">Cash Transaction Counter Tender</option>
-                        <option value="GCash">GCash Instant Digital Remittance</option>
-                        <option value="Credit Utang">Credit Utang (Store Account Receivable)</option>
-                    </select>
-                </div>
+                
 
                 <div style="display: flex; gap: 10px; width: 100%;">
                     <div style="flex: 1.2;">
-                        <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Customer Info (Optional)</label>
+                        <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Customer Info</label>
                         <input type="text" id="customerName" placeholder="Customer Full Name" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;">
                          <!-- <input type="password" id="customerpassword" style="display: none; width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;" placeholder="PIN Validation">-->
                     </div>
