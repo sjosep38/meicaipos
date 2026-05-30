@@ -599,7 +599,7 @@ body {
             </div>
             
             <div style="display: flex; gap: 20px; flex: 1; min-height: 0;">
-                <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: 1.1; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: .6; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
                     <div style="display: flex; gap: 10px; margin-bottom: 6px;">
                         <label id="gcashInLabel" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border: 1px solid #3b82f6; background: #eff6ff; color: #1d4ed8; font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 13px;">
                             <input type="radio" name="gcashType" value="GCASH IN" checked onchange="toggleGcashType()" style="display: none;"> GCash IN
@@ -1512,6 +1512,129 @@ function triggerConfirm(msg, action) {
 }
 
 function closeConfirm() { document.getElementById("confirmModal").style.display = "none"; }
+// ==========================================================================
+// EXCEL/CSV EXTRACT: EXPORT ALL CURRENT INVENTORY SHEET
+// ==========================================================================
+function exportAllStockToCSV() {
+    if (!db) return;
+    const store = db.transaction("products", "readonly").objectStore("products");
+    let rows = [["Barcode SKU", "Product Label Name", "Retail Price (PHP)", "Current Warehouse Stock Level"]];
+
+    store.openCursor().onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+            let v = cursor.value;
+            rows.push([
+                `"${v.barcode}"`, 
+                `"${v.name.replace(/"/g, '""')}"`, 
+                v.price.toFixed(2), 
+                v.stock
+            ]);
+            cursor.continue();
+        } else {
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF" + rows.map(e => e.join(",")).join("\n");
+            let link = document.createElement("a");
+            link.setAttribute("href", encodeURI(csvContent));
+            link.setAttribute("download", `Master_Stock_Sheet_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            triggerAlert("Master stock sheet extracted and prepared for download.", "success");
+        }
+    };
+}
+
+// ==========================================================================
+// DATA ENGINE MATRIX: FAST MOVING VELOCITY CALCULATION (BEST SELLERS)
+// ==========================================================================
+function calculateBestSellers() {
+    const listWrapper = document.getElementById("topProductsList");
+    if (!listWrapper) return;
+    listWrapper.innerHTML = `<p style="text-align:center; font-size:13px; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Analyzing transaction records...</p>`;
+
+    const store = db.transaction("sales", "readonly").objectStore("sales");
+    let frequencyMap = {};
+
+    store.openCursor().onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+            cursor.value.items.forEach(item => {
+                if (!frequencyMap[item.name]) {
+                    frequencyMap[item.name] = 0;
+                }
+                frequencyMap[item.name] += item.qty;
+            });
+            cursor.continue();
+        } else {
+            // Sort frequency map into top 5 metrics data entries arrays
+            let sortedProducts = Object.keys(frequencyMap).map(name => {
+                return { name: name, totalQty: frequencyMap[name] };
+            }).sort((a, b) => b.totalQty - a.totalQty).slice(0, 5);
+
+            if (sortedProducts.length === 0) {
+                listWrapper.innerHTML = `<p style="text-align:center; font-size:13px; color:var(--text-muted); padding:10px 0;">No sales ledger metrics found yet.</p>`;
+                return;
+            }
+
+            listWrapper.innerHTML = "";
+            sortedProducts.forEach((item, index) => {
+                const rankRow = document.createElement("div");
+                rankRow.style.cssText = "display:flex; justify-content:space-between; align-items:center; padding:10px 6px; border-bottom:1px solid #f1f5f9;";
+                
+                // Color configuration tags styling indicators for leading metrics paths
+                let badgeColor = "background:#64748b; color:white;";
+                if (index === 0) badgeColor = "background:#f59e0b; color:white;"; // Gold
+                if (index === 1) badgeColor = "background:#cbd5e1; color:var(--text-dark);"; // Silver
+                if (index === 2) badgeColor = "background:#b45309; color:white;"; // Bronze
+
+                rankRow.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span style="display:inline-block; width:22px; height:22px; line-height:22px; text-align:center; border-radius:50%; font-size:11px; font-weight:700; ${badgeColor}">${index + 1}</span>
+                        <strong style="font-size:13px; color:var(--text-dark);">${item.name}</strong>
+                    </div>
+                    <span style="font-size:13px; font-weight:700; color:var(--accent);">${item.totalQty} Sold</span>
+                `;
+                listWrapper.appendChild(rankRow);
+            });
+        }
+    };
+}
+
+// ==========================================================================
+// CENTRAL WRAPPER EXTENSION OVERRIDE: TARGETED VIEW TRAVERSAL HOOKS
+// ==========================================================================
+const baseToggleModal = toggleModal;
+toggleModal = function(id) {
+    baseToggleModal(id);
+    
+    // Automatically recalculate item analytics rankings on targeted interface execution
+    if (id === 'topProductsModal' && document.getElementById(id).style.display === 'flex') {
+        calculateBestSellers();
+    }
+};
+
+// ==========================================================================
+// CHROME AUTOMATION OVERRIDE: ENFORCE DEDICATED FIELD ACCESSIBILITY FOR SCANNER
+// ==========================================================================
+document.addEventListener("click", (e) => {
+    // If a modal overlay is open, block checkout laser focus re-allocation patterns
+    const overlays = Array.from(document.querySelectorAll(".modal, .modal-overlay"));
+    const activeOverlay = overlays.some(m => m.style.display === "flex" || m.id === "login-modal" && m.style.display !== "none");
+    
+    if (activeOverlay) return;
+
+    // Direct interaction overrides check patterns elements target contexts
+    const safeInputs = ["pBarcode", "pName", "pPrice", "pStock", "pSearch", "invSearch", "cashRendered", "customerName", "customerpassword", "tg-input-field"];
+    if (safeInputs.includes(e.target.id) || e.target.tagName === "SELECT" || e.target.tagName === "BUTTON" || e.target.closest("button")) {
+        return; 
+    }
+
+    // Default system focus assignment rules layout loop structural lockings
+    const laserInput = document.getElementById("cartScanner");
+    if (laserInput) {
+        laserInput.focus();
+    }
+});
 	</script>
 </body>
 </html>
