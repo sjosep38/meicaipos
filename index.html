@@ -114,7 +114,7 @@ body {
    ========================================================================== */
 .input-group {
     position: relative;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 }
 
 .input-group input, .input-group select {
@@ -313,7 +313,7 @@ body {
             <div class="error-msg" id="login-error" style="display: none; color: var(--danger); margin-bottom: 12px; font-size: 13px;">
                 <i class="fa-solid fa-circle-exclamation"></i> Incorrect Terminal Password
             </div>
-            <input type="password" id="password-input" placeholder="Enter Terminal Password" autocomplete="off" style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <input type="password" id="password-input" placeholder="Enter Terminal Password" Value="2026" autocomplete="off" style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
             <button id="login-btn" onclick="checkLogin()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Unlock Terminal</button>
         </div>
     </div>
@@ -591,14 +591,14 @@ body {
     </div>
 
     <div id="modal-2" class="modal">
-        <div class="modal-content" style="max-width: 1050px; display: flex; flex-direction: column; height: 85vh;">
+        <div class="modal-content" style="max-width: 1050px; display: flex; flex-direction: column; height: 85vh; padding: 10px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-wallet"></i> GCash Business Ledger Center</h2>
                 <button onclick="closeGcashModal()" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
             </div>
             
-            <div style="display: flex; gap: 20px; flex: 1; min-height: 0;">
-                <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: 1.1; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <div style="display: flex; gap: 10px; flex: 1; min-height: 0;">
+                <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: 1.1; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
                     <div style="display: flex; gap: 10px; margin-bottom: 6px;">
                         <label id="gcashInLabel" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border: 1px solid #3b82f6; background: #eff6ff; color: #1d4ed8; font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 13px;">
                             <input type="radio" name="gcashType" value="GCASH IN" checked onchange="toggleGcashType()" style="display: none;"> GCash IN
