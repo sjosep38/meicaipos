@@ -6,7 +6,7 @@
     <title>Mei Cai Store POS v2.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+   
 	<style>
 	/* ==========================================================================
    THEME VARIABLES & BASICS CONFIGURATIONS
@@ -324,18 +324,18 @@ body {
             <i class="fa-solid fa-cash-register" style="color: var(--primary);"></i> MEI CAI STORE <small style="font-weight: 400; opacity: 0.7;">v2.0</small>
         </div>
         <div class="header-actions">
-            <button class="nav-btn" onclick="toggleModal('salesModal')"><i class="fa-solid fa-chart-line"></i> Sales</button>
-            <button class="nav-btn" onclick="toggleModal('inventoryModal')"><i class="fa-solid fa-boxes-stacked"></i> Inventory</button>
+            <button class="nav-btn" onclick="toggleModal('salesModal')"><i class="fa-solid fa-chart-line"></i> Sales Report</button>
+            <button class="nav-btn" onclick="toggleModal('inventoryModal')"><i class="fa-solid fa-boxes-stacked"></i>Current Stocks</button>
             <button class="nav-btn" onclick="toggleModal('lowStockModal')"><i class="fa-solid fa-triangle-exclamation"></i> Low Stock</button>
             <button class="nav-btn" onclick="toggleModal('topProductsModal')"><i class="fa-solid fa-fire"></i> Best Sellers</button>
-            <button class="nav-btn" onclick="openGcashModal()"><i class="fa-solid fa-wallet"></i> GCash</button>
+            <button class="nav-btn" onclick="openGcashModal()"><i class="fa-solid fa-wallet"></i> GCash IN/OUT</button>
             <button class="nav-btn" onclick="openUtangModal()"><i class="fa-solid fa-book-open"></i> Credit Log</button>
             <button class="nav-btn" onclick="toggleModal('bulkUploadModal')"><i class="fa-solid fa-file-import"></i> Bulk Upload</button>
             <button class="nav-btn btn-logout" onclick="sendExportAndExit()"><i class="fa-solid fa-power-off"></i> Sign Off</button>
         </div>
     </header>
 
-    <main class="app-container">
+    <main class="app-container" style="display: flex; flex-direction: row;">
         
         <section class="column products-panel">
             <h3 id="formTitle" style="margin-top: 0; margin-bottom: 12px;">Inventory Manager</h3>
@@ -371,8 +371,8 @@ body {
                 <div class="scroll-list" id="productList"></div>
             </div>
         </section>
-
-        <section class="column cart-panel">
+		
+        <section class="column cart-panel" style="display: flex; flex-direction: column; height: 100%; width: 60%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
             <h3 style="margin-top: 0; margin-bottom: 12px;">Active Checkout Cart</h3>
             <input type="text" id="cartScanner" placeholder="⚡ Scan barcode laser here..." autocomplete="off">
             
