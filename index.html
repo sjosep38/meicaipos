@@ -313,7 +313,7 @@ body {
             <div class="error-msg" id="login-error" style="display: none; color: var(--danger); margin-bottom: 12px; font-size: 13px;">
                 <i class="fa-solid fa-circle-exclamation"></i> Incorrect Terminal Password
             </div>
-            <input type="password" id="password-input" placeholder="Enter Terminal Password" Value="2026" autocomplete="off" style="width: 100%; box-sizing: border-box; padding: 12px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
+            <input type="password" id="password-input" placeholder="Enter Terminal Password" Value="2026" autocomplete="off" style="text-align:center;  font-size:20px; width: 100%; box-sizing: border-box; padding: 6px; margin-bottom: 16px; border: 1px solid var(--border-color); border-radius: 6px;">
             <button id="login-btn" onclick="checkLogin()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Unlock Terminal</button>
         </div>
     </div>
@@ -366,14 +366,14 @@ body {
             <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 8px 0 12px 0;">
 
             <div style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
-                <input type="text" id="pSearch" placeholder="🔍 Search catalogue..." oninput="renderProducts()" autocomplete="off" style="margin-bottom: 10px;">
+                <input type="text" id="pSearch" placeholder="🔍 Search catalogue..." oninput="renderProducts()" autocomplete="off" style="margin-bottom: 10px; font-size:16px; border-radius:6px;padding:5px; ">
                 <div class="scroll-list" id="productList"></div>
             </div>
         </section>
 
         <section class="column cart-panel"style="display: flex; flex-direction: column; height: 100%;  width:70%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
-            <h3 style="margin-top: 0; margin-bottom: 12px;">Active Checkout Cart</h3>
-            <input type="text" id="cartScanner" placeholder="⚡ Scan barcode laser here..." autocomplete="off">
+            <h3 style="margin-top: 0; margin-bottom: 12px;">Active Cart</h3>
+            <input type="text" id="cartScanner" placeholder="⚡ Scan barcode laser here..." style="font-size:16px; border-radius:6px;padding:5px; " autocomplete="off">
             
             <div style="display: flex; padding: 10px 4px; font-weight: 700; font-size: 11px; text-transform: uppercase; color: var(--text-muted); border-bottom: 2px solid var(--border-color); margin-top: 10px;">
                 <span style="flex: 3.5;">Item Description</span>
@@ -381,8 +381,7 @@ body {
                 <span style="flex: 1.5; text-align: center;">Qty</span>
                 <span style="flex: 1.5; text-align: right;">Total</span>
                 <span style="flex: 1; text-align: right;">Action</span>
-            </div>
-            
+            </div>            
             <div class="scroll-list" id="cartItems" style="margin-top: 0;"></div>
             
             <button class="btn-void" style="margin-top: 10px; width: 100%;" onclick="voidCart()">
@@ -394,63 +393,73 @@ body {
                 </div>
         </section>
 
-        <section class="column checkout-panel" style="display: flex; flex-direction: column; height: 100%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
-            <h3 style="margin-top: 0; margin-bottom: 10px; flex-shrink: 0; font-size: 13px;">Payment Tender Processing</h3>
-            
-            <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
-                
-                <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                    <span style="color: var(--text-muted);">Gross Order Subtotal:</span>
-                    <span style="font-weight: 600;">₱<span id="summarySubtotal">0.00</span></span>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                    <span style="color: var(--text-muted);">Discounts Deducted:</span>
-                    <span style="color: var(--danger); font-weight: 600;">-₱<span id="discountLabel">0.00</span></span>
-                </div>
-                
-                <button class="nav-btn" style="width: 100%; justify-content: center; background: #fff8eb; border-color: #ffe1b3; color: #b45309; padding: 8px; font-size: 12px; margin-top: 2px;" onclick="askDiscountPassword()">
-                    <i class="fa-solid fa-percent"></i> Apply Senior/Manager 20% Privilege Discount
-                </button>
-            </div>
-
-            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0; flex-shrink: 0;">
-
-            <div style="display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;">
-                <div>
-                    <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Funding Route Channel</label>
+   <section class="column checkout-panel" style="display: flex; flex-direction: column; min-height: 100%; box-sizing: border-box; overflow: hidden; padding: 14px 16px;">
+            <h3 style="margin-top: 0; margin-bottom: 10px;"> CheckOut </h3>
+           <div>
+                    <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Payment Option</label>
                     <select id="payMethod" onchange="handlePayMethodChange()" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px;">
-                        <option value="Cash">Cash Transaction Counter Tender</option>
-                        <option value="GCash">GCash Instant Digital Remittance</option>
-                        <option value="Credit Utang">Credit Utang (Store Account Receivable)</option>
+                        <option value="Cash">Cash </option>
+                        <option value="GCash">GCash</option>
+                        <option value="Credit Utang">Credit Utang </option>
                     </select>
-                </div>
-
-                <div style="display: flex; gap: 10px; width: 100%;">
-                    <div style="flex: 1.2;">
-                        <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Customer Info (Optional)</label>
-                        <input type="text" id="customerName" placeholder="Customer Full Name" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;">
-                        <input type="password" id="customerpassword" style="display: none; width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;" placeholder="PIN Validation">
+					<div style="flex: 1.2;">
+                        <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Customer Info</label>
+                        <input type="text" id="customerName" placeholder="Customer Full Name" style="width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px;">
+                         <!-- <input type="password" id="customerpassword" style="display: none; width: 100%; box-sizing: border-box; padding: 8px; font-size: 13px; height: 38px;" placeholder="PIN Validation">-->
                     </div>
 
+                </div>
+ <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 5px 0; flex-shrink: 0;">
+<div style="display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; width: 100%;">
+
+    <!-- Row 1: Gross Subtotal -->
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+        <span style="color: var(--text-muted);">Gross Order Subtotal:</span>
+        <span style="font-weight: 600;">₱<span id="summarySubtotal">0.00</span></span>
+    </div>
+
+    <!-- Row 2: Discounts -->
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+        <span style="color: var(--text-muted);">Discount :</span>
+        <span style="color: var(--danger);">₱<span id="discountLabel">0.00</span></span>
+    </div>
+
+    <!-- Row 3: Change Due -->
+    <div style="display: flex; justify-content: space-between; align-items: center; ">
+        <span style="font-size: 13px; color: var(--text-muted); letter-spacing: 0.02em;">Change Due</span>
+        <span id="changeDisplay" style="font-size: 13px; color: var(--accent); line-height: 1.2;">₱0.00</span>
+    </div>
+
+    <!-- Row 4: Net Payable -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+        <span style="font-size: 13px; opacity: 0.8; letter-spacing: 0.02em;">Net Payable Invoice</span>
+        <span id="summaryTotal" style="font-size: 13px;  line-height: 1.2; color: #10b981;">₱0.00</span>
+    </div>
+    
+    <!-- Optional Button (Uncomment if needed) -->
+    <!--
+    <button class="nav-btn" style="width: 100%; justify-content: center; background: #fff8eb; border-color: #ffe1b3; color: #b45309; padding: 8px; font-size: 12px; margin-top: 6px; display: flex; align-items: center; gap: 6px;" onclick="askDiscountPassword()">
+        <i class="fa-solid fa-percent"></i> Apply Senior/Manager 20% Privilege Discount
+    </button>
+    -->
+</div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 5px 0; flex-shrink: 0;">
+
+            <div style="display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;">
+                
+
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    
                     <div style="flex: 1;">
                         <label style="display: block; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;">Tender Received (₱)</label>
-                        <input type="number" id="cashRendered" placeholder="0.00" oninput="updateTotals()" autocomplete="off" style="font-size: 16px; font-weight: 700; text-align: right; padding: 6px 10px; width: 100%; box-sizing: border-box; height: 38px;">
+                        <input type="number" id="cashRendered" placeholder="0.00" oninput="updateTotals()" autocomplete="off" style="font-size: 16px; font-weight: 700; text-align: CENTER; padding: 6px 10px; width: 100%; box-sizing: border-box; height: 38px;">
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: auto; padding-top: 10px; flex-shrink: 0; display: flex; flex-direction: column; gap: 10px;">
-                <div style="display: flex; flex-direction: row; gap: 10px; align-items: stretch; width: 100%;">
-                    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; background: #f1f5f9; padding: 10px; border-radius: 6px;">
-                        <span style="font-size: 10px; text-transform: uppercase; font-weight: 600; color: var(--text-muted); letter-spacing: 0.02em; margin-bottom: 2px;">Change Due</span>
-                        <span id="changeDisplay" style="font-size: 18px; font-weight: 700; color: var(--accent); line-height: 1.2;">₱0.00</span>
-                    </div>
 
-                    <div class="total-display" style="flex: 1; padding: 10px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; text-align: left; background: var(--text-dark); color: white;">
-                        <span style="font-size: 10px; text-transform: uppercase; font-weight: 500; opacity: 0.8; letter-spacing: 0.02em; margin-bottom: 2px;">Net Payable Invoice</span>
-                        <span id="summaryTotal" style="font-size: 20px; font-weight: 800; display: block; line-height: 1.2; color: #10b981;">₱0.00</span>
-                    </div>
-                </div>
 
                 <button class="btn-complete" style="width: 100%; padding: 12px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 700; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;" onclick="processTransaction()">
                     <i class="fa-solid fa-circle-check"></i> Process Checkout & Print
@@ -470,7 +479,7 @@ body {
                         <option value="monthly">Monthly Master Cycle Log</option>
                         <option value="all">Complete Database Dump</option>
                     </select>
-                    <button onclick="exportToCSV()" style="background: #2563eb; color: white;" class="nav-btn"><i class="fa-solid fa-file-csv"></i> Extract CSV</button>
+                    <button onclick="exportToCSV()" style="background: #2563eb; color: white;" class="nav-btn"><i class="fa-solid fa-file-csv"></i> Download CSV</button>
                     <button onclick="toggleModal('salesModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
                 </div>
             </div>
@@ -478,10 +487,10 @@ body {
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
                         <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
-                            <th style="padding: 12px;">Timestamp Sequence</th>
-                            <th style="padding: 12px;">Purchased Items Breakdowns</th>
-                            <th style="padding: 12px;">Total Yield</th>
-                            <th style="padding: 12px;">Tender Route</th>
+                            <th style="padding: 12px;">DATE / TIME </th>
+                            <th style="padding: 12px;">SOLD ITEMS</th>
+                            <th style="padding: 12px;">TOTAL PRICE</th>
+                            <th style="padding: 12px;">PAYMENT METHOD</th>
                         </tr>
                     </thead>
                     <tbody id="salesBody" style="text-transform:uppercase;"></tbody>
@@ -495,7 +504,7 @@ body {
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-boxes-stacked"></i> Master Stock Parameters List</h2>
                 <div style="display: flex; gap: 8px;">
-                    <button onclick="exportAllStockToCSV()" style="background: #10b981; color: white;" class="nav-btn"><i class="fa-solid fa-file-excel"></i> Extract Full Stock Sheet</button>
+                    <button onclick="exportAllStockToCSV()" style="background: #10b981; color: white;" class="nav-btn"><i class="fa-solid fa-file-excel"></i> Download All Stock Sheet</button>
                     <button onclick="toggleModal('inventoryModal')" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
                 </div>
             </div>
@@ -504,11 +513,11 @@ body {
                 <table style="width: 100%; border-collapse: collapse; text-align: left;">
                     <thead>
                         <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
-                            <th style="padding: 12px;">Barcode SKU</th>
-                            <th style="padding: 12px;">Product Label Name</th>
-                            <th style="padding: 12px;">Base Valuation</th>
-                            <th style="padding: 12px;">Floor Count Qty</th>
-                            <th style="padding: 12px;">Actions</th>
+                            <th style="padding: 12px;">BARCODE SKU</th>
+                            <th style="padding: 12px;">PRODUCT NAME</th>
+                            <th style="padding: 12px;">PRICE</th>
+                            <th style="padding: 12px;">QUANTITY</th>
+                            <th style="padding: 12px;">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody id="invBody" style="text-transform:uppercase;"></tbody>
@@ -531,7 +540,7 @@ body {
                         <tr style="background: #fef2f2; border-bottom: 2px solid #fee2e2;">
                             <th style="padding: 12px; color: var(--danger)">SKU Barcode</th>
                             <th style="padding: 12px; color: var(--danger)">Product Name</th>
-                            <th style="padding: 12px; color: var(--danger)">Current Units Count Remaining</th>
+                            <th style="padding: 12px; color: var(--danger)">Remaining</th>
                         </tr>
                     </thead>
                     <tbody id="lowStockBody" style="text-transform:uppercase;"></tbody>
@@ -1509,7 +1518,7 @@ function populateLowStockReport() {
             const v = cursor.value;
             if (v.stock <= 5) {
                 const tr = document.createElement("tr");
-                tr.innerHTML = `<td style="padding:12px;">${v.barcode}</td><td style="padding:12px;">${v.name}</td><td style="padding:12px;font-weight:700;color:var(--danger);">${v.stock} Left</td>`;
+                tr.innerHTML = `<td style="padding:12px;">${v.barcode}</td><td style="padding:12px;">${v.name}</td><td style="padding:12px;font-weight:700;color:var(--danger);">${v.stock}</td>`;
                 tbody.appendChild(tr);
             }
             cursor.continue();
