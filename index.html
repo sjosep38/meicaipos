@@ -359,7 +359,7 @@ body {
             </div>
 
             <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                <button class="btnSave" onclick="saveProduct()" style="flex: 1;">Commit to Database</button>
+                <button class="btnSave" id="btnSave" onclick="saveProduct()" style="flex: 1;">Add Product</button>
                 <button id="btnCancel" class="btn-void" style="display: none; flex: 0.4; margin: 0; padding: 10px;" onclick="resetForm()">Cancel</button>
             </div>
 
@@ -592,14 +592,14 @@ body {
     </div>
 
     <div id="modal-2" class="modal">
-        <div class="modal-content" style="max-width: 1050px; display: flex; flex-direction: column; height: 85vh; padding: 10px;">
+        <div class="modal-content" style="max-width: 1050px; padding: 10px; display: flex; flex-direction: column; height: 85vh;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="margin: 0; font-size: 20px;"><i class="fa-solid fa-wallet"></i> GCash Business Ledger Center</h2>
-                <button onclick="closeGcashModal()" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Dismiss</button>
+                <button onclick="closeGcashModal()" style="background: #e2e8f0; color: var(--text-dark);" class="nav-btn"><i class="fa-solid fa-xmark"></i> Exit</button>
             </div>
             
             <div style="display: flex; gap: 10px; flex: 1; min-height: 0;">
-                <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: 1.1; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <form id="gcashForm" onsubmit="handleGcashSubmit(event)" style="flex: .7; display: flex; flex-direction: column; gap: 12px; background: var(--bg-main); padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
                     <div style="display: flex; gap: 10px; margin-bottom: 6px;">
                         <label id="gcashInLabel" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border: 1px solid #3b82f6; background: #eff6ff; color: #1d4ed8; font-weight: 600; border-radius: 6px; cursor: pointer; font-size: 13px;">
                             <input type="radio" name="gcashType" value="GCASH IN" checked onchange="toggleGcashType()" style="display: none;"> GCash IN
@@ -632,47 +632,54 @@ body {
                 <div style="flex: 2; display: flex; flex-direction: column;">
                     <div style="display: flex; gap: 6px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; justify-content: space-between; align-items: center;">
                         <div style="display: flex; gap: 4px; background: #eee; padding: 3px; border-radius: 6px;">
-                            <button type="button" class="nav-btn btn-filter active" onclick="changeGcashFilter('daily', this)">Daily</button>
-                            <button type="button" class="nav-btn btn-filter" onclick="changeGcashFilter('weekly', this)">Weekly</button>
-                            <button type="button" class="nav-btn btn-filter" onclick="changeGcashFilter('all', this)">All</button>
+<label for="ledgerFilter">Filter Period: </label>
+<select id="ledgerFilter" onchange="loadGcashLedger()">
+    <option value="all">All Time</option>
+    <option value="daily">Daily (Today)</option>
+    <option value="weekly">Weekly (Past 7 Days)</option>
+    <option value="monthly">Monthly (This Month)</option>
+    <option value="yearly">Yearly (This Year)</option>
+</select>
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px;">
                         <div style="background: #eff6ff; padding: 12px; border-radius: 6px; border: 1px solid #bfdbfe;">
-                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1e40af; display: block;">Inflows</span>
+                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1e40af; display: block;">CashIn</span>
                             <strong id="inAmountSum" style="font-size: 16px; color: #1d4ed8;">₱0.00</strong>
                             <div style="font-size: 11px; margin-top: 4px;">Comms: <span id="inProfitSum">₱0.00</span></div>
                         </div>
                         <div style="background: #fef2f2; padding: 12px; border-radius: 6px; border: 1px solid #fca5a5;">
-                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #991b1b; display: block;">Outflows</span>
+                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #991b1b; display: block;">CashOut</span>
                             <strong id="outAmountSum" style="font-size: 16px; color: #b91c1c;">₱0.00</strong>
                             <div style="font-size: 11px; margin-top: 4px;">Comms: <span id="outProfitSum">₱0.00</span></div>
                         </div>
                         <div style="background: #f0fdf4; padding: 12px; border-radius: 6px; border: 1px solid #bbf7d0;">
-                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #166534; display: block;">Consolidated Pool</span>
+                            <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #166534; display: block;">Consolidated</span>
                             <strong id="totalAmountSum" style="font-size: 16px; color: #15803d;">₱0.00</strong>
                             <div style="font-size: 11px; margin-top: 4px; color: var(--accent);">Net Profit: <span id="totalProfitSum">₱0.00</span></div>
                         </div>
                     </div>
 
-                    <div style="flex: 1; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px;">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
-                            <thead>
-                                <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
-                                    <th style="padding: 10px;">Timestamp</th>
-                                    <th style="padding: 10px;">Type</th>
-                                    <th style="padding: 10px;">Amount</th>
-                                    <th style="padding: 10px;">Mobile No</th>
-                                    <th style="padding: 10px;">Comms</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactionTableBody"></tbody>
-                        </table>
-                        <div id="emptyState" style="text-align: center; padding: 40px; color: var(--text-muted); display: none;">
-                            <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 8px; display: block;"></i> Zero recorded GCash remittance actions.
-                        </div>
-                    </div>
+<div style="flex: 1; overflow: auto; border: 1px solid var(--border-color); border-radius: 6px;">
+    <table style="width: 100%; min-width: 600px; border-collapse: collapse; font-size: 13px; white-space: nowrap;">
+        <thead>
+            <tr style="background: var(--bg-main); border-bottom: 2px solid var(--border-color); position: sticky; top: 0;">
+                <th style="padding: 5px; text-align: left;">Date/Time</th>
+                <th style="padding: 5px; text-align: left;">Type</th>
+                <th style="padding: 5px; text-align: left;">Amount</th>
+                <th style="padding: 5px; text-align: left;">Mobile No</th>
+                <th style="padding: 5px; text-align: left;">Name</th>
+				<th style="padding: 5px; text-align: left;">Ref NO:</th>
+                <th style="padding: 5px; text-align: left;">Comms</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTableBody"></tbody>
+    </table>
+    <div id="emptyState" style="text-align: center; padding: 40px; color: var(--text-muted); display: none;">
+        <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 8px; display: block;"></i> Zero recorded GCash remittance actions.
+    </div>
+</div>
                 </div>
             </div>
         </div>
@@ -838,7 +845,8 @@ function loadProductToForm(item) {
     document.getElementById("pName").value = item.name;
     document.getElementById("pPrice").value = item.price;
     document.getElementById("pStock").value = item.stock;
-    document.getElementById("formTitle").innerText = "Modify Registered Item";
+    document.getElementById("formTitle").innerText = "Update Database";
+	document.getElementById("btnSave").innerText = "Edit Product";
     document.getElementById("btnCancel").style.display = "inline-block";
 }
 
@@ -849,6 +857,7 @@ function resetForm() {
     document.getElementById("pPrice").value = "";
     document.getElementById("pStock").value = "";
     document.getElementById("formTitle").innerText = "Inventory Manager";
+	document.getElementById("btnSave").innerText = "Add Product";
     document.getElementById("btnCancel").style.display = "none";
 }
 
@@ -1111,13 +1120,8 @@ function handleGcashSubmit(e) {
     const name = document.getElementById("gcashCustomerName").value.trim();
     const ref = document.getElementById("gcashRefNo").value.trim();
 
-    // Standard local configuration matrix evaluation variables structures logic lines
-    let commission = 0;
-    if (type === "GCASH IN") {
-        commission = amount <= 1000 ? 10 : Math.ceil(amount * 0.01);
-    } else {
-        commission = amount <= 1000 ? 15 : Math.ceil(amount * 0.015);
-    }
+    // Fixed commission logic at a flat 2%
+    const commission = Math.ceil(amount * 0.02);
 
     const tx = db.transaction("gcash", "readwrite");
     const store = tx.objectStore("gcash");
@@ -1161,12 +1165,14 @@ function loadGcashLedger() {
                 const tr = document.createElement("tr");
                 tr.style.borderBottom = "1px solid var(--border-color)";
                 tr.innerHTML = `
-                    <td style="padding:10px;">${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</td>
-                    <td style="padding:10px; font-weight:700; color:${v.type==='GCASH IN'?'#1d4ed8':'#b91c1c'}">${v.type}</td>
-                    <td style="padding:10px; font-weight:600;">₱${v.amount.toFixed(2)}</td>
-                    <td style="padding:10px;">${v.mobile}</td>
-                    <td style="padding:10px;">${v.name}</td>
-                    <td style="padding:10px; color:var(--accent); font-weight:700;">₱${v.commission.toFixed(2)}</td>
+                    
+					<td style="padding: 5px;">${new Date(d).toLocaleDateString()} ${new Date(d).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</td>
+                    <td style="padding:5px; font-weight:700; color:${v.type==='GCASH IN'?'#1d4ed8':'#b91c1c'}">${v.type}</td>
+                    <td style="padding:5px; font-weight:600;">₱${v.amount.toFixed(2)}</td>
+                    <td style="padding:5px;">${v.mobile}</td>
+                    <td style="padding:5px;">${v.name}</td>
+					<td style="padding:5px;">${v.ref}</td>
+                    <td style="padding:5px; color:var(--accent); font-weight:700;">₱${v.commission.toFixed(2)}</td>
                 `;
                 tbody.appendChild(tr);
             }
